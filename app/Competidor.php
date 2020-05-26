@@ -13,7 +13,7 @@ class Competidor extends Model
 
     public function scopeActivos($query)
     {
-        return $query->where('id_competidor','>', 0);
+        return $query->where('id_competidor','>', 0)->whereIn('estatus', [1,2]);
     }
 
     public function getTableColumns()

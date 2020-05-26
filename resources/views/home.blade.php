@@ -27,6 +27,7 @@
                 data-url="{{route('registros')}}"
                 data-classes="table table-bordered table-striped table-borderless table-responsive-md"
                 data-buttons-class="btn btn-outline-primary"
+                data-filter-control="true"
                 >
                 <thead class="bg-gradient-info text-white">
                 <tr>
@@ -35,7 +36,7 @@
                     <th data-align="center" data-sortable="true" data-field="id">Número</th>
                     <th data-align="center" data-sortable="true" data-field="nombre">Nombre</th>
                     <th data-align="center" data-sortable="true" data-field="correo">Correo</th>
-                    <th data-align="center" data-sortable="true" data-field="estatus">Estatus</th>
+                    <th data-filter-control="select" data-align="center" data-sortable="true" data-field="estatus">Estatus</th>
                     <th data-switchable="false" data-align="center" data-field="id_link">Editar</th>
                 </tr>
                 </thead>

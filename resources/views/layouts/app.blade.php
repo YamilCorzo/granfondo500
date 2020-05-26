@@ -22,6 +22,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap-table/dist/bootstrap-table.min.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap-table/dist/locale/bootstrap-table-es-MX.min.js') }}"></script>
+    <script src="{{ asset('plugins/bootstrap-table/dist/extensions/filter-control/bootstrap-table-filter-control.min.js') }}"></script>
     <script src="{{ asset('js/ready.js') }}"></script>
 </head>
 <body>
