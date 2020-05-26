@@ -48,6 +48,11 @@
                             {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li> --}}
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                href="http://deuxdemo.com/proyectos/granfondo/?autologin_code=elBjmpyBZuIAL1Y4aORjH00qnNhINfTh" target="_blank">
+                                Administrar Tienda</a>
+                            </li>
 
                                 @RouteNotIsName('register')
                                     <li class="nav-item">
@@ -85,7 +90,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        @endauth
                     </ul>
                 </div>
             </div>
