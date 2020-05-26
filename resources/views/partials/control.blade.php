@@ -1,0 +1,31 @@
+{!!GetDivRowIni($key,$attribute)!!}
+<div class="{{GetColumns($attribute)}}">
+    @switch($attribute)
+        @case('id_genero')
+        @case('id_talla_jersey')
+        @case('id_talla_calcetas')
+        @case('id_distancia')
+        @case('id_categoria')
+        @case('id_corral')
+            @include('partials.label')
+            @include('partials.select')
+            @include('partials.invalid-feedback')
+        @break
+        @case('c_terminos_condiciones')
+        @case('c_reglamento')
+        @case('c_menor_de')
+        @case('c_conformidad')
+        @case('c_conocimiento')
+            <div class="icheck-primary form-check">
+                @include('partials.checkbox')
+                @include('partials.label')
+                @include('partials.invalid-feedback')
+            </div>
+        @break
+        @default
+            @include('partials.label')
+            @include('partials.input')
+            @include('partials.invalid-feedback')
+    @endswitch
+</div>
+{!!GetDivRowFin($key,$attribute)!!}
