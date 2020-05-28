@@ -38,4 +38,4 @@ use Illuminate\Http\Request;
 //     Route::post('competidores', 'CompetidoresController@store');
 // });
 //Route::get('competidores', 'CompetidoresController@store')->name('competidores')->middleware('apicustom');
-Route::get('competidores', 'CompetidoresController@store')->name('competidores');
+Route::post('competidores', 'CompetidoresController@store')->name('competidores')->middleware('apimiddleware');

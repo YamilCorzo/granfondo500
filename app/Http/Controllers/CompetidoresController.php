@@ -14,11 +14,8 @@ class CompetidoresController extends Controller
 {
     public function store(CreateCompetidorRequest $request)
     {
+        $id_registros = parent::registro($request,'1');
         try {
-
-                header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS");
-                header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
-                header("Access-Control-Allow-Origin: *");
                 $competidor = Competidor::create([
                 'id_evento' => $request->get('id_evento'),
                 'id_ticket' => $request->get('id_ticket'),
@@ -29,8 +26,10 @@ class CompetidoresController extends Controller
                 'estatus' => 1
                 ]);
                 parent::Enviar($competidor);
+                parent::registro($competidor,'201',$id_registros,$competidor->id_competidor);
                 return response()->json('Mensaje enviado correctamente.', 201);
          } catch(\Exception $e) {
+            parent::registro($e->getMessage(),'500',$id_registros);
             return response()->json($e->getMessage(), 500);
          }
     }

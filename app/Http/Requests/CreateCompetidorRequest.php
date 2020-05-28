@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Registro;
+use Illuminate\Support\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 class CreateCompetidorRequest extends FormRequest
 {
     /**
@@ -58,7 +61,19 @@ class CreateCompetidorRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $errors = (new ValidationException($validator))->errors();
+        $this->registro(json_encode($errors));
         throw new HttpResponseException(response()->json(['errors' => $errors
         ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+    }
+
+    private function registro($registro)
+    {
+        try {
+            Registro::create([
+                'registro' => $registro,
+                'estatus' => '422',
+                'fec_reg' => Carbon::now()
+            ]);
+        } catch(\Exception $e) {}
     }
 }

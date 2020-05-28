@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-use App\Competidor;
-use Illuminate\Support\Carbon;
-use App\Mail\MensajeRecibido;
-use Illuminate\Support\Facades\Mail;
 use App\User;
+use App\Registro;
+use App\Competidor;
 use App\Mail\EnviarPass;
+use App\Mail\MensajeRecibido;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -70,5 +72,20 @@ class Controller extends BaseController
     public function UsuarioPass(User $user,$password)
     {
         Mail::to($user->email)->queue(new EnviarPass($user,$password));
+    }
+
+    public function registro($registro,$estatus,$id_registros = 0,$id = 0)
+    {
+        $result = 0;
+        try {
+            $result = Registro::create([
+                'registro' => $registro,
+                'estatus' => $estatus,
+                'id' => $id,
+                'id_registros_rel' => $id_registros,
+                'fec_reg' => Carbon::now()
+            ])->id_registros;
+        } catch(\Exception $e) {$result = 0;}
+        return $result;
     }
 }
