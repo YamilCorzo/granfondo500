@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Database\Eloquent\Model;
 
 class Competidor extends Model
@@ -20,4 +22,48 @@ class Competidor extends Model
     {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
+
+
+    public function Genero()
+    {
+        return SisTip::find($this->id_genero)->des;
+    }
+
+    public function Jersey()
+    {
+        return SisTip::find($this->id_talla_jersey)->des;
+    }
+
+    public function Calcetas()
+    {
+        return SisTip::find($this->id_talla_calcetas)->des;
+    }
+
+    public function Distancia()
+    {
+        return SisTip::find($this->id_distancia)->des;
+    }
+
+    public function Categoria()
+    {
+        return SisTip::find($this->id_categoria)->des;
+    }
+
+    public function Corral()
+    {
+        return SisTip::find($this->id_corral)->des;
+    }
+
+    public function FechaLargaAct()
+    {
+        $carbon = new Carbon($this->fec_act);
+        return $carbon->isoFormat('dddd DD \\d\\e MMMM \\d\\e\\l YYYY, h:mm A');
+    }
+
+    public function FechaLargaReg()
+    {
+        $carbon = new Carbon($this->fec_reg);
+        return $carbon->isoFormat('dddd DD \\d\\e MMMM \\d\\e\\l YYYY, h:mm A');
+    }
+
 }

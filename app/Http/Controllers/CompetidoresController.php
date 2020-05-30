@@ -14,7 +14,7 @@ class CompetidoresController extends Controller
 {
     public function store(CreateCompetidorRequest $request)
     {
-        $id_registros = parent::registro($request,'1');
+        $id_registros = parent::registro(json_encode($request->all()),'1');
         try {
                 $competidor = Competidor::create([
                 'id_evento' => $request->get('id_evento'),
@@ -38,7 +38,7 @@ class CompetidoresController extends Controller
     {
         try {
             parent::Actualiza($request,$competidor);
-            return redirect()->route('competidor',[EncryptCompetidor($competidor)])->with('success', 'Se actualizo correctamente el competido.');
+            return redirect()->route('competidor',[EncryptCompetidor($competidor)])->with('success', 'Proceso de inscripción correcto.');
         } catch(\Exception $e) {
             return back()->withInput()->withErrors(array('message'=>$e->getMessage()));
         }

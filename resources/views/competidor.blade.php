@@ -28,9 +28,9 @@ use Illuminate\Support\Facades\Crypt;
     @if($editar)
         <form class="bg-white shadow rounded py-4 px-4 justify-content-center" method="post"
             @auth
-            @RouteIsName('competidor')action="{{route('competidor.update',[$competidor])}}"@endif
+            @RouteIsName('competidor')action="{{route('competidor.update',[EncryptCompetidor($competidor)])}}"@endif
             @else
-            action="{{route('formulario.update',[$competidor])}}"
+            action="{{route('formulario.update',[EncryptCompetidor($competidor)])}}"
             @endauth
         autocomplete="off">
         @method('PUT')

@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -34,5 +36,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('IsIntro', function ($expression = null) {
             return "<?php if (Request::routeIs('login')): ?>";
         });
+
+        Carbon::setLocale('es');
+        setlocale(LC_TIME,'es_ES');
     }
 }

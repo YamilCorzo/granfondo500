@@ -41,11 +41,6 @@ class CreateCompetidorRequest extends FormRequest
     public function messages()
     {
         return [
-            // 'id_evento.required' => 'Se requiere el evento.',
-            // 'id_ticket.required' => 'Se requiere el ticket.',
-            // 'id_usuario.required' => 'Se requiere el usuario.',
-            // 'nombre.required' => 'Se requiere el nombre.',
-            // 'correo.required' => 'Se requiere el correo.'
             'required' => 'El :attribute es requerido.',
             'email' => 'Correo electrónico incorrecto.'
         ];
@@ -60,20 +55,24 @@ class CreateCompetidorRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
+        $id_registros = $this->registro(json_encode($this->all()));
         $errors = (new ValidationException($validator))->errors();
-        $this->registro(json_encode($errors));
+        $this->registro(json_encode($errors),'422',$id_registros);
         throw new HttpResponseException(response()->json(['errors' => $errors
         ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
     }
 
-    private function registro($registro)
+    private function registro($registro,$estatus = '1',$id_registros = 0)
     {
+        $result = 0;
         try {
-            Registro::create([
+            $result = Registro::create([
                 'registro' => $registro,
-                'estatus' => '422',
+                'estatus' => $estatus,
+                'id_registros_rel' => $id_registros,
                 'fec_reg' => Carbon::now()
-            ]);
-        } catch(\Exception $e) {}
+            ])->id_registros;
+        } catch(\Exception $e) {$result = 0;}
+        return $result;
     }
 }

@@ -6,6 +6,8 @@ use App\User;
 use App\Registro;
 use App\Competidor;
 use App\Mail\EnviarPass;
+use App\Mail\Confirmacion;
+use Illuminate\Http\Request;
 use App\Mail\MensajeRecibido;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -18,9 +20,9 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function Actualiza($request,Competidor $competidor)
+    public function Actualiza(Request $request,Competidor &$competidor)
     {
-        $competidor->update([
+        $competidor->first()->update([
             'fec_act' => Carbon::now(),
             'nombre' => $request->input('nombre'),
             'apellidos' => $request->input('apellidos'),
@@ -49,7 +51,9 @@ class Controller extends BaseController
             'c_conformidad' => ($request->has('c_conformidad')) ? 1 : 0,
             'c_conocimiento' => ($request->has('c_conocimiento')) ? 1 : 0,
             'estatus' => 2,
-            ]);
+        ]);
+        $competidor = $competidor->first();
+        $this->Confirmacion($competidor);
     }
 
     public function EnviarCorreos($ids)
@@ -87,5 +91,10 @@ class Controller extends BaseController
             ])->id_registros;
         } catch(\Exception $e) {$result = 0;}
         return $result;
+    }
+
+    public function Confirmacion(Competidor $competidor)
+    {
+        Mail::to($competidor->correo)->queue(new Confirmacion($competidor));
     }
 }

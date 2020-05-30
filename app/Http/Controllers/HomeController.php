@@ -38,7 +38,7 @@ class HomeController extends Controller
     {
         try {
             parent::Actualiza($request,$competidor);
-            return redirect()->route('competidor',[EncryptCompetidor($competidor)])->with('success', 'Se actualizo correctamente el competido.');
+            return redirect()->route('competidor',[EncryptCompetidor($competidor)])->with('success', 'Proceso de inscripción correcto.');
         } catch(\Exception $e) {
             return back()->withInput()->withErrors(array('message'=>$e->getMessage()));
         }
