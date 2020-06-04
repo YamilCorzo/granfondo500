@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <title>Mensaje Recibido</title>
     <!-- Required meta tags -->
