@@ -124,6 +124,7 @@
                                         <div style="width:100% !important;">
                                             <div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
                                                 <div align="center" class="img-container center autowidth" style="padding-right: 0px;padding-left: 0px;">
+                                                    <img align="center" alt="Alternate text" border="0" class="center autowidth"
                                                     src="{{asset('asset/GF500_Back_Confirmacion_Arriba.png')}}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 500px; display: block;" title="Alternate text" width="500"/>
                                                 </div>
                                             </div>
@@ -173,6 +174,7 @@
                                         <div style="width:100% !important;">
                                             <div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
                                                 <div align="center" class="img-container center autowidth" style="padding-right: 0px;padding-left: 0px;">
+                                                    <img align="center" alt="Alternate text" border="0" class="center autowidth"
                                                     src="{{asset('asset/GF500_Back_Confirmacion_Abajo.png')}}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 500px; display: block;" title="Alternate text" width="500"/>
                                                 </div>
                                             </div>
