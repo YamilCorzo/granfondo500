@@ -16,13 +16,16 @@ class CompetidoresController extends Controller
     {
         $id_registros = parent::registro(json_encode($request->all()),'1');
         try {
+                $id_corral = ($request->get('vip') == 1 ? 31 : 0);
                 $competidor = Competidor::create([
                 'id_evento' => $request->get('id_evento'),
                 'id_ticket' => $request->get('id_ticket'),
                 'id_usuario' => $request->get('id_usuario'),
+                'vip' => $request->get('vip'),
                 'fec_reg' => Carbon::now(),
                 'nombre' => $request->get('nombre'),
                 'correo' => $request->get('correo'),
+                'id_corral' => $id_corral,
                 'estatus' => 1
                 ]);
                 parent::Enviar($competidor);

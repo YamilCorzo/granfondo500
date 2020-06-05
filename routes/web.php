@@ -26,7 +26,7 @@ Route::get('registros', 'HomeController@registros')->name('registros');
 Route::get('competidor/{competidor}', 'HomeController@edit')->name('competidor');
 Route::put('competidor/{competidor}', 'HomeController@update')->name('competidor.update');
 Route::get('categorias/{id_genero}/{id_distancia}', 'HomeController@categorias')->name('categorias');
-Route::get('corral/{id_categoria}', 'HomeController@corral')->name('corral');
+Route::get('corral/{id_categoria}/{vip}', 'HomeController@corral')->name('corral');
 Route::get('correo/{competidor}', 'HomeController@EnviarCorreo')->name('correo');
 Route::get('correos/{ids}', 'HomeController@EnviarCorreos')->name('correos');
 

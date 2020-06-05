@@ -172,7 +172,7 @@ function GetTypee($attribute)
     return $result;
 }
 
-function Getonchange($attribute)
+function Getonchange($attribute,$vip)
 {
     switch ($attribute) {
         case 'id_genero':
@@ -182,7 +182,7 @@ function Getonchange($attribute)
             $result = 'onchange="SelectDistancia(this); return false;"';
             break;
         case 'id_categoria':
-            $result = 'onchange="SelectCategoria(this); return false;"';
+            $result = 'onchange="SelectCategoria(this,'.$vip.'); return false;"';
             break;
         default:
             $result = '';

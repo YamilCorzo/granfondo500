@@ -8,7 +8,7 @@ if ($attribute == 'id_categoria') {
 <select @if(!$editar) disabled @endif
 class="form-control @include('partials.is-valid')"
 name="{{$attribute}}" id="{{$attribute}}"
-{!!Getonchange($attribute)!!}
+{!!Getonchange($attribute,$competidor->vip)!!}
 >
 @if($attribute == 'id_categoria')
     @if($categorias instanceof Traversable)

@@ -1,7 +1,4 @@
 @extends($layout)
-@php
-use Illuminate\Support\Facades\Crypt;
-@endphp
 @section('content')
 
     @auth
@@ -104,14 +101,18 @@ use Illuminate\Support\Facades\Crypt;
             }
         };
 
-        function SelectCategoria(obj) {
+        function SelectCategoria(obj,vip) {
+            var o = $('#id_corral');
             var id_categoria = parseInt($('option:selected', obj).val());
-            Corral(id_categoria);
+            var id_corral = parseInt($('option:selected', o).val());
+            if (!(vip > 0 && id_corral == 31)) {
+                Corral(id_categoria,vip);
+            }
         };
 
-        function Corral(id_categoria) {
+        function Corral(id_categoria,vip) {
             if (id_categoria > 0) {
-                $.get("{!!url('corral')!!}/"+id_categoria, CargarCorral);
+                $.get("{!!url('corral')!!}/"+id_categoria+"/"+vip, CargarCorral);
             } else {
                 $('#id_corral')
                     .find('option')

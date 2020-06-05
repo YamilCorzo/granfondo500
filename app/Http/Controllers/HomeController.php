@@ -102,40 +102,42 @@ class HomeController extends Controller
         }
     }
 
-    public function corral($id_categoria)
+    public function corral($id_categoria,$vip)
     {
         try {
-
-            switch ($id_categoria) {
-                case 21: // 15 - 17 / Juvenil
-                    $id_corral = 32;
-                    break;
-                case 22: // 18 - 39 / Libre
-                    $id_corral = 31;
-                    break;
-                case 23: // 40 - 44 / Master A
-                    $id_corral = 33;
-                    break;
-                case 24: // 45 - 49 / Master B
-                    $id_corral = 34;
-                    break;
-                case 25: // 50 - 54 / Master C
-                    $id_corral = 35;
-                    break;
-                case 26: // 55 - 59 / Master D
-                    $id_corral = 36;
-                    break;
-                case 27: // 60 - 64 / Master E
-                case 28: // 60 + / Master E
-                    $id_corral = 37;
-                    break;
-                case 29: // 65 + / Master F
-                    $id_corral = 38;
-                    break;
-                default:
-                    $id_corral = 0;
+            if ($vip > 0) {
+                $id_corral = 31;
+            } else {
+                switch ($id_categoria) {
+                    case 21: // 15 - 17 / Juvenil
+                        $id_corral = 32;
+                        break;
+                    case 22: // 18 - 39 / Libre
+                        $id_corral = 31;
+                        break;
+                    case 23: // 40 - 44 / Master A
+                        $id_corral = 33;
+                        break;
+                    case 24: // 45 - 49 / Master B
+                        $id_corral = 34;
+                        break;
+                    case 25: // 50 - 54 / Master C
+                        $id_corral = 35;
+                        break;
+                    case 26: // 55 - 59 / Master D
+                        $id_corral = 36;
+                        break;
+                    case 27: // 60 - 64 / Master E
+                    case 28: // 60 + / Master E
+                        $id_corral = 37;
+                        break;
+                    case 29: // 65 + / Master F
+                        $id_corral = 38;
+                        break;
+                    default:
+                        $id_corral = 0;
+                }
             }
-
             $corral = SisTip::find($id_corral);
             return response()->json($corral, 200);
         } catch(\Exception $e) {

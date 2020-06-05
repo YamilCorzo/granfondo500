@@ -33,6 +33,7 @@ class CreateCompetidorRequest extends FormRequest
             'id_evento' => 'required',
             'id_ticket' => 'required',
             'id_usuario' => 'required',
+            'vip' => 'required',
             'nombre' => 'required',
             'correo' => 'required|email'
         ];
