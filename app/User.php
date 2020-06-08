@@ -43,4 +43,10 @@ class User extends Authenticatable
         $this->save();
         return $this->api_token;
     }
+
+    public function UserTitleCase()
+    {
+        $result = ucwords(strtolower($this->name));
+    	return empty($result) ? $this->name : $result;
+    }
 }
