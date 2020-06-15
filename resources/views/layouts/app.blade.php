@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Bootstrap Table -->
-    <link href="{{ asset('plugins/bootstrap-table/dist/bootstrap-table.min.css') }}">
+    <link href="{{asset('plugins/bootstrap-table/dist/bootstrap-table.min.css') }}">
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap-table/dist/bootstrap-table.min.js') }}"></script>
@@ -27,7 +27,8 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm"> --}}
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background: #000 !important;"> <!-- bg-white -->
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -50,8 +51,7 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li> --}}
                             <li class="nav-item">
-                                <a class="nav-link"
-                                href="http://deuxdemo.com/proyectos/granfondo/?autologin_code=elBjmpyBZuIAL1Y4aORjH00qnNhINfTh" target="_blank">
+                                <a class="nav-link" href="http://deuxdemo.com/proyectos/granfondo/?autologin_code=elBjmpyBZuIAL1Y4aORjH00qnNhINfTh" target="_blank">
                                 Administrar Tienda</a>
                             </li>
 
@@ -104,5 +104,27 @@
             </div>
         </main>
     </div>
+@if(session('urlori'))
+    <script>
+        let timerInterval
+        Swal.fire({
+            icon: 'success',
+            text: '{{session('urlori')}}',
+            timer: 5000,
+            timerProgressBar: false,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            },
+            onClose: () => {
+                clearInterval(timerInterval)
+            }
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            // if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.replace('http://deuxdemo.com/proyectos/granfondo/')
+            // }
+        });
+    </script>
+@endif
 </body>
 </html>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\CreateCompetidorRequest;
 use App\Http\Requests\UpdateCompetidorRequest;
 
@@ -40,8 +41,10 @@ class CompetidoresController extends Controller
     public function update(UpdateCompetidorRequest $request,Competidor $competidor)
     {
         try {
-            parent::Actualiza($request,$competidor);
-            return redirect()->route('competidor',[EncryptCompetidor($competidor)])->with('success', 'Proceso de inscripción correcto.');
+            //parent::Actualiza($request,$competidor);
+            //parent::Actualiza($request,$competidor->id_competidor);
+            //return Redirect::to(env('URL_ORI'));
+            return redirect()->route('formulario',[EncryptCompetidor(parent::Actualiza($request,$competidor->id_competidor))])->with('urlori', 'Proceso de inscripción correcto.');
         } catch(\Exception $e) {
             return back()->withInput()->withErrors(array('message'=>$e->getMessage()));
         }

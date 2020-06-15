@@ -43,5 +43,27 @@
             {{config('app.name')}} | Copyright @ {{date('Y')}}
         </footer> --}}
     </div>
+@if(session('urlori'))
+    <script>
+        let timerInterval
+        Swal.fire({
+            icon: 'success',
+            text: '{{session('urlori')}}',
+            timer: 5000,
+            timerProgressBar: false,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            },
+            onClose: () => {
+                clearInterval(timerInterval)
+            }
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            // if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.replace('http://deuxdemo.com/proyectos/granfondo/')
+            // }
+        });
+    </script>
+@endif
 </body>
 </html>
