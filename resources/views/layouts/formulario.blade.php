@@ -43,6 +43,19 @@
             {{config('app.name')}} | Copyright @ {{date('Y')}}
         </footer> --}}
     </div>
+<script>
+    function Procesando() {
+        Swal.fire({
+            text: 'Procesando',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            timerProgressBar: false,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            }
+        });
+    };
+</script>
 @if(session('urlori'))
     <script>
         let timerInterval

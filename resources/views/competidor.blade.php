@@ -14,7 +14,7 @@
                     data-toggle="tooltip" data-placement="top" title="Reenviar">
                     <i class="fas fa-mail-bulk"></i></button> --}}
                     <a href="{{route('correo',[EncryptCompetidor($competidor)])}}" class="btn btn-lg btn-outline-primary btn-block"
-                    role="button"
+                    role="button" onclick="Procesando();"
                     data-toggle="tooltip" data-placement="top" title="Reenviar">
                         <i class="fas fa-mail-bulk"></i>
                     </a>
@@ -40,7 +40,7 @@
                 @foreach ($cards as $card)
                     @include('partials.card',['headercard'=>$card['headercard'],'attributes'=>$card['attributes']])
                 @endforeach
-                @if($editar)<button type="submit" class="btn btn-outline-primary btn-lg btn-block shadow">Guardar</button>@endif
+                @if($editar)<button type="submit" onclick="Procesando();" class="btn btn-outline-primary btn-lg btn-block shadow">Guardar</button>@endif
             </div>
         </div>
     @if($editar)

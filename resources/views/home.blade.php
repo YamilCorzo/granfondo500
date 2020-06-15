@@ -54,12 +54,14 @@
                             return row.id
                         });
         if (result.length > 0) {
+            Procesando();
             var ids = JSON.stringify(result);
             $.get("{!!url('correos')!!}/"+ids, ResultEnviar).fail(ResultEnviar);
         }
     };
 
     function ResultEnviar(data,status,xhr) {
+        Swal.close();
         if (xhr.status == 200) {
             $('#successmsj').html(btnalert+data.msj).show().fadeOut(10000);
         } else {
