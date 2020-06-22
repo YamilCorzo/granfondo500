@@ -2,6 +2,7 @@
 use App\SisTip;
 use App\Categoria;
 use App\Competidor;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 function SetCorral($id_corral)
 {
@@ -17,7 +18,12 @@ function SetCorral($id_corral)
 
 function GetValue($model,$name)
 {
-    return $model->toArray()[$name];
+    if ($name == 'fec_nacimiento') {
+        return (new Carbon($model->toArray()[$name]))->format('Y-m-d');
+    } else {
+        return $model->toArray()[$name];
+    }
+
 }
 
 function GetLabel($attribute)
@@ -36,22 +42,22 @@ function GetLabel($attribute)
             $result = 'País';
             break;
         case 'correo':
-            $result = 'Correo Electrónico';
+            $result = 'Correo electrónico';
             break;
         case 'conf_correo':
-            $result = 'Confirmar Correo Electrónico';
+            $result = 'Confirmar correo electrónico';
             break;
         case 'celular':
-            $result = 'Número de Celurar';
+            $result = 'Número de celular';
             break;
         case 'otr_tel':
-            $result = 'Otro Número Telefónico';
+            $result = 'Otro número telefónico';
             break;
         case 'fec_nacimiento':
-            $result = 'Fecha de Nacimiento';
+            $result = 'Fecha de nacimiento';
             break;
         case 'lugar_nac':
-            $result = 'Lugar de Nacimiento';
+            $result = 'Lugar de nacimiento';
             break;
         case 'edad':
             $result = 'Edad';
@@ -60,31 +66,31 @@ function GetLabel($attribute)
             $result = 'Genero';
             break;
         case 'id_talla_jersey':
-            $result = 'Talla Jersey Unisex';
+            $result = 'Talla jersey unisex';
             break;
         case 'id_talla_calcetas':
-            $result = 'Talla Calcetas Unisex';
+            $result = 'Talla calcetas unisex';
             break;
         case 'id_distancia':
-            $result = 'Selecciona La Distancia';
+            $result = 'Selecciona la distancia';
             break;
         case 'id_categoria':
-            $result = 'Elige Tu Categoría';
+            $result = 'Elige tu categoría';
             break;
         case 'id_corral':
             $result = 'Corral';
             break;
         case 'equipo':
-            $result = 'Nombre De Tu Equipo';
+            $result = 'Nombre de tu equipo';
             break;
         case 'contacto_emerg':
-            $result = 'Nombre del Contacto de Emergencia';
+            $result = 'Nombre del contacto de emergencia';
             break;
         case 'tel_emerg':
-            $result = 'Teléfono del Contacto de Emergencia';
+            $result = 'Teléfono del contacto de emergencia';
             break;
         case 'num_personas':
-            $result = 'Cuantas Personas - Te Acompañan (No Participantes)';
+            $result = '¿Cuántas personas te acompañan? (no ciclistas)';
             break;
         default:
             $result = '';

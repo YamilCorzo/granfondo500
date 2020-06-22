@@ -32,7 +32,7 @@ class Controller extends BaseController
                 'conf_correo' => $request->input('conf_correo'),
                 'celular' => $request->input('celular'),
                 'otr_tel' => $request->input('otr_tel') ?? '',
-                'fec_nacimiento' => $request->input('fec_nacimiento'),
+                'fec_nacimiento' => Carbon::createFromFormat('Y-m-d', $request->input('fec_nacimiento')),
                 'lugar_nac' => $request->input('lugar_nac'),
                 'edad' => $request->input('edad'),
                 'id_genero' => $request->input('id_genero'),

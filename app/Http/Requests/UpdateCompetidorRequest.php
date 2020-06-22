@@ -78,7 +78,7 @@ class UpdateCompetidorRequest extends FormRequest
     {
         return [
             'pais' => 'país',
-            'conf_correo' => 'correo de confinación',
+            'conf_correo' => 'correo de confirmación',
             'fec_nacimiento' => 'fecha de nacimiento',
             'lugar_nac' => 'lugar de nacimiento',
             'id_genero' => 'genero',

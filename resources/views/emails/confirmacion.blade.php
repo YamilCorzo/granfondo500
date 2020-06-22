@@ -143,10 +143,10 @@
                                                     <div style="color:#555555;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;line-height:1.2;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
                                                         <div style="line-height: 1.2; font-size: 12px; color: #555555; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 14px;">
                                                             <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
-                                                                <span style="color: #ffffff;">Número de competidor: {{$competidor->id_competidor}}.</span>
+                                                                <span style="color: #ffffff;">Número de competidor: {{$competidor->id_competidor}}</span>
                                                             </p>
                                                             <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
-                                                                <span style="color: #ffffff;">Nombre completo: {{$competidor->nombre.' '.$competidor->apellidos}}.</span>
+                                                                <span style="color: #ffffff;">Nombre completo: {{$competidor->nombre.' '.$competidor->apellidos}}</span>
                                                             </p>
                                                             <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
                                                                 <span style="color: #ffffff;">Categoría: {{$competidor->Categoria().'. Distancia: '.$competidor->Distancia()}}.</span>
