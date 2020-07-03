@@ -167,6 +167,9 @@
                                                         <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
                                                             <span style="font-size: 14px;">Una vez que lo hayas llenado y enviado, te haremos llegar un correo confirmando tu registro.</span>
                                                         </p>
+                                                        <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
+                                                            <span style="color: #cfff00;"><strong>{{GetProducto($competidor->id_evento)}}</strong></span>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>

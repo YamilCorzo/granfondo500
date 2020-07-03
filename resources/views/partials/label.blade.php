@@ -4,8 +4,10 @@
     @case('c_menor_de')
     @case('c_conformidad')
     @case('c_conocimiento')
+    @case('c_jersey')
+    @case('c_bici_triatlon')
         <label class="form-check-label"for="{{$attribute}}">
-            {{config('granfondo.infocheck.'.$attribute)}}
+            {!! config('granfondo.infocheck.'.$attribute) !!}
         </label>
     @break
     @default

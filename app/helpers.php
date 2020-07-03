@@ -3,6 +3,7 @@ use App\SisTip;
 use App\Categoria;
 use App\Competidor;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 function SetCorral($id_corral)
 {
@@ -36,10 +37,10 @@ function GetLabel($attribute)
             $result = 'Apellido(s)';
             break;
         case 'estado':
-            $result = 'Estado';
+            $result = 'Estado de residencia';
             break;
         case 'pais':
-            $result = 'País';
+            $result = 'País de residencia';
             break;
         case 'correo':
             $result = 'Correo electrónico';
@@ -63,7 +64,7 @@ function GetLabel($attribute)
             $result = 'Edad';
             break;
         case 'id_genero':
-            $result = 'Genero';
+            $result = 'Genero*';
             break;
         case 'id_talla_jersey':
             $result = 'Talla jersey unisex';
@@ -108,6 +109,8 @@ function GetDivRowIni($key,$attribute)
         case 'c_menor_de':
         case 'c_conformidad':
         case 'c_conocimiento':
+        case 'c_jersey':
+        case 'c_bici_triatlon':
             $result = '';
             break;
         default:
@@ -130,6 +133,8 @@ function GetDivRowFin($key,$attribute)
         case 'c_menor_de':
         case 'c_conformidad':
         case 'c_conocimiento':
+        case 'c_jersey':
+        case 'c_bici_triatlon':
             $result = '';
             break;
         default:
@@ -231,6 +236,8 @@ function GetColumns($attribute)
         case 'c_menor_de':
         case 'c_conformidad':
         case 'c_conocimiento':
+        case 'c_jersey':
+        case 'c_bici_triatlon':
             $result = 'form-group';
             break;
         default:
@@ -258,6 +265,27 @@ function EncryptCompetidor(Competidor $competidor)
         $result = Crypt::encryptString($competidor->toJson());
     } catch(\Exception $e) {
         $result = null;
+    }
+    return $result;
+}
+// function EncryptCompetidor($id_competidor)
+// {
+//     $result = null;
+//     try {
+//         $result = Crypt::encryptString($id_competidor);
+//     } catch(\Exception $e) {
+//         $result = null;
+//     }
+//     return $result;
+// }
+
+function GetProducto($id_evento)
+{
+    $result = '';
+    try {
+        $result = collect(DB::select('select obtenerProducto(?) AS producto',array($id_evento)))->first()->producto;
+    } catch(\Exception $e) {
+        $result = 'Sin Asignar';
     }
     return $result;
 }

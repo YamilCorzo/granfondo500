@@ -3,5 +3,12 @@ type="{{GetTypee($attribute)}}"
 class="form-control {{GetCelTel($attribute)}} @include('partials.is-valid')"
 name="{{$attribute}}"
 id="{{$attribute}}"
-value="{{old($attribute,GetValue($competidor,$attribute))}}"
+@if ($attribute == 'edad')
+min="15"
+	@if (GetValue($competidor,$attribute) == 0)
+		value="{{old($attribute, 15)}}"
+	@endif 
+@else
+value="{{old($attribute, GetValue($competidor,$attribute))}}"
+@endif
 >

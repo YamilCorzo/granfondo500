@@ -16,6 +16,8 @@
         @case('c_menor_de')
         @case('c_conformidad')
         @case('c_conocimiento')
+        @case('c_jersey')
+        @case('c_bici_triatlon')
             <div class="icheck-primary form-check">
                 @include('partials.checkbox')
                 @include('partials.label')

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<form class="bg-white shadow rounded py-3 px-4">
+<form class="rounded py-3 px-4"> <!-- bg-white shadow -->
         <div class="card bg-white shadow rounded">
-            <div class="card-header">Competidores</div>
+            <div class="card-header fondo-login">Competidores</div>
             <div class="card-body">
                 <div id="toolbar">
                     <button type="button" class="btn btn-outline-primary"
@@ -47,6 +47,7 @@
         </div>
 </form>
 @endsection
+@section('js')
 <script>
     const btnalert = '<button type="button" class="close" data-dismiss="alert">&times;</button>';
     function Enviar() {
@@ -68,4 +69,16 @@
             $('#dangermsj').html(btnalert+data.responseJSON.msj).show().fadeOut(10000);
         }
     };
+
+    $('#tcompetidores').bootstrapTable({
+        locale:'es-MX',
+        pagination: true,
+        pageList: [10, 25, 50, 100, 500, 'Todo'],
+        search: true,
+        searchAlign: 'left',
+        showExport: true,
+        exportDataType: 'all',
+        exportTypes:['csv', 'txt', 'xlsx'],
+    });
 </script>
+@stop

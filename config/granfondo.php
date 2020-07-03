@@ -1,8 +1,11 @@
 <?php
+
+use Illuminate\Support\Carbon;
+
 return [
     'cards' => [
         [
-            'headercard'=>'DATOS PERSONALES',
+            'headercard'=>'GRAN FONDO 500 VERACRUZ 2001',//.(Carbon::now()->add(1, 'year')->year),
             'attributes'=>
             [
                 'nombre',
@@ -21,7 +24,7 @@ return [
             ],
         ],
         [
-            'headercard'=>'INFORMACIÓN PARA EVENTO',
+            'headercard'=>'INFORMACIÓN PARA COMPETENCIA',
             'attributes'=>
             [
                 'id_talla_jersey',
@@ -43,7 +46,21 @@ return [
             ],
         ],
         [
-            'headercard'=>'MENORES DE 15 AÑOS: NO PUEDEN PARTICIPAR EN EL EVENTO',
+            'headercard'=>'JERSEY OBLIGATORIO',
+            'attributes'=>
+            [
+                'c_jersey',
+            ],
+        ],
+        [
+            'headercard'=>'PROHIBICIÓN DE BICICLETAS DE TRIATLÓN',
+            'attributes'=>
+            [
+                'c_bici_triatlon',
+            ],
+        ],
+        [
+            'headercard'=>'MENORES DE 15 AÑOS NO PUEDEN PARTICIPAR EN EL EVENTO',
             'attributes'=>
             [
                 'c_menor_de',
@@ -60,9 +77,15 @@ return [
     ],
     'infocheck' => [
         'c_terminos_condiciones'=>'Acepto términos y condiciones del reglamento así como del aviso de privacidad de GF500 AC.',
-        'c_reglamento'=>'Reitero que he leído y estoy de acuerdo con el reglamento del evento por lo que deslindo de cualquier tipo de responsabilidad, civil, penal, laboral o de cualquier otra índole a GF500 AC., Gran Fondo 500,  gran fondo 500 Veracruz, Eddy´s Bikes,  sus representantes, socios, asociados, patrocinadores, proveedores, aliados y cualquier otro relacionado con el evento.',
-        'c_menor_de'=>'Entre 15 y 17 años: el padre o tutor deberá de firmar la responsiva y recoger el paquete siendo responsable del menor de edad.',
+        'c_reglamento'=>'Declaro haber leído toda la información de la página del evento
+        <a href="https://www.granfondo500.com/" target="_blank">www.granfondo500.com</a>,
+        el <a href="http://deuxdemo.com/proyectos/granfondo/reglamento/" target="_blank">Reglamento</a>,
+        los <a href="https://www.invextarjetas.com.mx/boletines/Carrera/Gran-Fondo-500.pdf" target="_blank">Términos y Condiciones</a>,
+        así como el <a href="http://deuxdemo.com/proyectos/granfondo/wp-content/uploads/2020/05/aviso-de-privacidad.pdf" target="_blank">Aviso de Privacidad</a> y acepto todo lo establecido en los mismos.',
+        'c_menor_de'=>'Entre 15 y 17 años el padre o tutor deberá de firmar la responsiva y recoger el paquete siendo responsable del menor de edad.',
         'c_conformidad'=>'Reitero mi conformidad en utilizar el jersey del evento al ser obligatorio, de lo contrario no podré participar sin derecho a reembolso alguno.',
         'c_conocimiento'=>'Reitero mi conocimiento y aceptación de que las bicicletas de triatlón y/o contra reloj están prohibidas.',
+        'c_jersey'=>'Acepto usar el jersey del evento por ser obligatorio, de lo contrario seré expulsado sin derecho a reembolso alguno.',
+        'c_bici_triatlon'=>'Acepto que las bicicletas de triatlón y/o contra reloj están prohibidas.',
     ],
 ];

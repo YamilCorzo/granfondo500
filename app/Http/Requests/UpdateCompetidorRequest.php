@@ -34,7 +34,7 @@ class UpdateCompetidorRequest extends FormRequest
             'celular' => 'required|integer|min:10',
             'fec_nacimiento' => 'required|date',
             'lugar_nac' => 'required|min:3',
-            'edad' => 'required|min:2|gte:15',
+            'edad' => 'required|min:15|gte:15',
             'id_genero' => 'required|gt:0|exists:App\SisTip,id_tip',
             'c_terminos_condiciones' => 'required',
             'id_talla_jersey' => 'required|gt:0|exists:App\SisTip,id_tip',
@@ -50,7 +50,9 @@ class UpdateCompetidorRequest extends FormRequest
                 return ($edad > 15 && $edad < 17);
             }),
             'c_conformidad' => 'required',
-            'c_conocimiento' => 'required'
+            'c_conocimiento' => 'required',
+            'c_jersey' => 'required',
+            'c_bici_triatlon' => 'required',
         ];
     }
 
@@ -70,7 +72,9 @@ class UpdateCompetidorRequest extends FormRequest
             'apellidos.required' => 'Los :attribute son requeridos.',
             'edad.gte' => 'Menores de 15 años no pueden participar.',
             'c_terminos_condiciones.required' => 'Aceptar los términos y condiciones.',
-            'c_menor_de.required' => 'Debe aceptar los términos. Edad: '.$edad
+            'c_menor_de.required' => 'Debe aceptar los términos. Edad: '.$edad,
+            'c_jersey' => 'Debe aceptar el uso del Jersey obligatorio',
+            'c_bici_triatlon' => 'Debe aceptar la prohibición del uso de Bicicleta de Triatlón',
         ];
     }
 
@@ -93,7 +97,9 @@ class UpdateCompetidorRequest extends FormRequest
             'num_personas' => 'número de personas',
             'c_reglamento' => 'reglamento ',
             'c_conformidad' => 'campo',
-            'c_conocimiento' => 'campo'
+            'c_conocimiento' => 'campo',
+            'c_jersey' => 'campo',
+            'c_bici_triatlon' => 'campo',
         ];
     }
 }

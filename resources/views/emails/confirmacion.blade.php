@@ -156,6 +156,9 @@
                                                             </p>
                                                             <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;"> </p>
                                                             <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
+                                                                <span style="color: #ffffff;">{{GetProducto($competidor->id_evento)}}</span>
+                                                            </p>
+                                                            <p style="font-size: 14px; line-height: 1.2; word-break: break-word; text-align: center; mso-line-height-alt: 17px; margin: 0;">
                                                                 <span style="color: #ffffff;">No olvides llevar identificación oficial con fotografia a la entrega de paquetes. No es necesario que imprimas este documento.</span>
                                                             </p>
                                                         </div>

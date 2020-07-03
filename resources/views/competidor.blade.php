@@ -1,3 +1,4 @@
+{{-- {{dd($competidor->select('c_jersey', 'c_bici_triatlon')->get()->toArray())}} --}}
 @extends($layout)
 @section('content')
 
@@ -40,7 +41,7 @@
                 @foreach ($cards as $card)
                     @include('partials.card',['headercard'=>$card['headercard'],'attributes'=>$card['attributes']])
                 @endforeach
-                @if($editar)<button type="submit" onclick="Procesando();" class="btn btn-outline-primary btn-lg btn-block shadow">Guardar</button>@endif
+                @if($editar)<button type="submit" onclick="Procesando();" class="btn btn-outline-primary btn-lg btn-block shadow">Finalizar</button>@endif
             </div>
         </div>
     @if($editar)
@@ -137,7 +138,6 @@
                 console.log(xhr);
             }
         };
-
     </script>
 @endif
 

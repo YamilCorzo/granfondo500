@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
         $router = app('router');
         $router->bind('competidor', function($value) {
             try {
-                return new Competidor(json_decode(Crypt::decryptString($value),true));
+                return Competidor::find(json_decode(Crypt::decryptString($value),true)['id_competidor']);
             } catch (DecryptException $e) {
                 dd($e);
             }

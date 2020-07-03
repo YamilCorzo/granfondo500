@@ -11,6 +11,7 @@
         <strong>{{$message}}</strong>
     </span>
 @else
+    @if($attribute == 'id_genero')<span class="form-text text-primary">*Las opciones de género que se ofrecen son únicamente para fines de determinar la categoría del ciclista.</span>@endif
     @if($attribute == 'id_categoria')<span class="form-text text-primary">*Las categorías que se muestren dependerán de la selección de género y distancia.</span>@endif
     @if($attribute == 'id_corral')<span class="form-text text-primary">*El corral asignado dependerá de la categoría seleccionada o si el paquete comprado es VIP.</span>@endif
 @enderror

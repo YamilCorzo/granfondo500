@@ -23,6 +23,7 @@
     <script src="{{ asset('plugins/bootstrap-table/dist/bootstrap-table.min.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap-table/dist/locale/bootstrap-table-es-MX.min.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap-table/dist/extensions/filter-control/bootstrap-table-filter-control.min.js') }}"></script>
+    <script src="{{ asset('plugins/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js') }}"></script>
     <script src="{{ asset('js/ready.js') }}"></script>
 </head>
 <body>
@@ -104,6 +105,7 @@
             </div>
         </main>
     </div>
+
 <script>
     function Procesando() {
         Swal.fire({
@@ -134,10 +136,11 @@
         }).then((result) => {
             /* Read more about handling dismissals below */
             // if (result.dismiss === Swal.DismissReason.timer) {
-                window.location.replace('http://deuxdemo.com/proyectos/granfondo/')
+                window.location.replace('https://www.granfondo500.com/')
             // }
         });
     </script>
 @endif
+@yield('js')
 </body>
 </html>
