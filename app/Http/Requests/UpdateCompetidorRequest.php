@@ -23,42 +23,56 @@ class UpdateCompetidorRequest extends FormRequest
      */
     public function rules()
     {
-        $edad = FormRequest::input('edad');
-        return [
-            'nombre' => 'required|min:3',
-            'apellidos' => 'required|min:3',
-            'estado' => 'required|min:3',
-            'pais' => 'required|min:3',
-            'correo' => 'required|email',
-            'conf_correo' => 'required|email|same:correo',
-            'celular' => 'required|integer|min:10',
-            'fec_nacimiento' => 'required|date',
-            'lugar_nac' => 'required|min:3',
-            'edad' => 'required|min:15|gte:15',
-            'id_genero' => 'required|gt:0|exists:App\SisTip,id_tip',
-            'c_terminos_condiciones' => 'required',
-            'id_talla_jersey' => 'required|gt:0|exists:App\SisTip,id_tip',
-            'id_talla_calcetas' => 'required|gt:0|exists:App\SisTip,id_tip',
-            'id_distancia' => 'required|gt:0|exists:App\SisTip,id_tip',
-            'id_categoria' => 'required|gt:0|exists:App\SisTip,id_tip',
-            'id_corral' => 'required|gt:0|exists:App\SisTip,id_tip',
-            'contacto_emerg' => 'required|min:3',
-            'tel_emerg' => 'required|integer|min:10',
-            'num_personas' => 'required|integer',
-            'c_reglamento' => 'required',
-            'c_menor_de' => Rule::requiredIf(function () use ($edad) {
-                return ($edad > 15 && $edad < 17);
-            }),
-            'c_conformidad' => 'required',
-            'c_conocimiento' => 'required',
-            'c_jersey' => 'required',
-            'c_bici_triatlon' => 'required',
-        ];
+        //$edad = FormRequest::input('edad');
+        if ($this->competidor->id_evento == 4243) {
+            return [
+                'nombre' => 'required|min:3',
+                'apellidos' => 'required|min:3',
+                'estado' => 'required|min:3',
+                'pais' => 'required|min:3',
+                'correo' => 'required|email',
+                'conf_correo' => 'required|email|same:correo',
+                'celular' => 'required|integer|min:10',
+            ];
+        } else {
+            $edad = $this->competidor->edad;
+            return [
+                'nombre' => 'required|min:3',
+                'apellidos' => 'required|min:3',
+                'estado' => 'required|min:3',
+                'pais' => 'required|min:3',
+                'correo' => 'required|email',
+                'conf_correo' => 'required|email|same:correo',
+                'celular' => 'required|integer|min:10',
+                'fec_nacimiento' => 'required|date',
+                'lugar_nac' => 'required|min:3',
+                'edad' => 'required|min:15|gte:15',
+                'id_genero' => 'required|gt:0|exists:App\SisTip,id_tip',
+                'c_terminos_condiciones' => 'required',
+                'id_talla_jersey' => 'required|gt:0|exists:App\SisTip,id_tip',
+                'id_talla_calcetas' => 'required|gt:0|exists:App\SisTip,id_tip',
+                'id_distancia' => 'required|gt:0|exists:App\SisTip,id_tip',
+                'id_categoria' => 'required|gt:0|exists:App\SisTip,id_tip',
+                'id_corral' => 'required|gt:0|exists:App\SisTip,id_tip',
+                'contacto_emerg' => 'required|min:3',
+                'tel_emerg' => 'required|integer|min:10',
+                'num_personas' => 'required|integer',
+                'c_reglamento' => 'required',
+                'c_menor_de' => Rule::requiredIf(function () use ($edad) {
+                    return ($edad > 15 && $edad < 17);
+                }),
+                'c_conformidad' => 'required',
+                'c_conocimiento' => 'required',
+                'c_jersey' => 'required',
+                'c_bici_triatlon' => 'required',
+            ];
+        }
     }
 
     public function messages()
     {
-        $edad = FormRequest::input('edad');
+        //$edad = FormRequest::input('edad');
+        $edad = $this->competidor->edad;
         return [
             'required' => 'El :attribute es requerido.',
             'email' => 'Correo electrónico incorrecto.',

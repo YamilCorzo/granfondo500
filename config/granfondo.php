@@ -88,4 +88,20 @@ return [
         'c_jersey'=>'Acepto usar el jersey del evento por ser obligatorio, de lo contrario seré expulsado sin derecho a reembolso alguno.',
         'c_bici_triatlon'=>'Acepto que las bicicletas de triatlón y/o contra reloj están prohibidas.',
     ],
+    'card' => [
+        [
+            'headercard'=>'GRAN FONDO 500 VERACRUZ 2001',//.(Carbon::now()->add(1, 'year')->year),
+            'attributes'=>
+            [
+                'nombre',
+                'apellidos',
+                'estado',
+                'pais',
+                'correo',
+                'conf_correo',
+                'celular',
+                'otr_tel',
+            ],
+        ],
+    ],
 ];

@@ -44,7 +44,7 @@ class CompetidoresController extends Controller
             //parent::Actualiza($request,$competidor);
             //parent::Actualiza($request,$competidor->id_competidor);
             //return Redirect::to(env('URL_ORI'));
-            return redirect()->route('formulario',[EncryptCompetidor(parent::Actualiza($request,$competidor->id_competidor))])->with('urlori', 'Proceso de inscripción correcto.');
+            return redirect()->route('formulario',[EncryptCompetidor(parent::Actualiza($request,$competidor))])->with('urlori', 'Proceso de inscripción correcto.');
         } catch(\Exception $e) {
             return back()->withInput()->withErrors(array('message'=>$e->getMessage()));
         }
@@ -52,7 +52,7 @@ class CompetidoresController extends Controller
 
     public function edit(Competidor $competidor)
     {
-        $cards = Config::get('granfondo.cards');
+        $cards = ($competidor->id_evento == 4243 ? Config::get('granfondo.card') : Config::get('granfondo.cards'));
         if($competidor->estatus == 2) {
             $editar = false;
         } else {

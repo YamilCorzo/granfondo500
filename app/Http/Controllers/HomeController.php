@@ -28,7 +28,7 @@ class HomeController extends Controller
 
     public function edit(Competidor $competidor)
     {
-        $cards = Config::get('granfondo.cards');
+        $cards = ($competidor->id_evento == 4243 ? Config::get('granfondo.card') : Config::get('granfondo.cards'));
         $layout = 'layouts.app';
         $editar = true;
         return view('competidor',compact('competidor','cards','layout','editar'));
@@ -38,7 +38,7 @@ class HomeController extends Controller
     {
         try {
             //parent::Actualiza($request,$competidor->id_competidor);
-            return redirect()->route('competidor',[EncryptCompetidor(parent::Actualiza($request,$competidor->id_competidor))])->with('success', 'Proceso de inscripción correcto.');
+            return redirect()->route('competidor',[EncryptCompetidor(parent::Actualiza($request,$competidor))])->with('success', 'Proceso de inscripción correcto.');
         } catch(\Exception $e) {
             return back()->withInput()->withErrors(array('message'=>$e->getMessage()));
         }
