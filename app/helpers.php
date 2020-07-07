@@ -19,12 +19,25 @@ function SetCorral($id_corral)
 
 function GetValue($model,$name)
 {
-    if ($name == 'fec_nacimiento') {
-        return (new Carbon($model->toArray()[$name]))->format('Y-m-d');
-    } else {
-        return $model->toArray()[$name];
+    $result = '';
+    switch ($name) {
+        case 'fec_nacimiento':
+            $result = (new Carbon($model->toArray()[$name]))->format('Y-m-d');
+            break;
+        case 'edad':
+            if ($model->toArray()[$name] <= 0) {
+                $result = 15;
+            } else {
+                $result = $model->toArray()[$name];
+            }
+            break;
+        case 'id_evento':
+            $result = GetProducto($model->toArray()[$name]);
+            break;
+        default:
+            $result = $model->toArray()[$name];
     }
-
+    return $result;
 }
 
 function GetLabel($attribute)
@@ -77,6 +90,9 @@ function GetLabel($attribute)
             break;
         case 'id_categoria':
             $result = 'Elige tu categoría';
+            break;
+        case 'id_evento':
+            $result = 'Producto';
             break;
         case 'id_corral':
             $result = 'Corral';

@@ -31,6 +31,7 @@ return [
                 'id_talla_calcetas',
                 'id_distancia',
                 'id_categoria',
+                'id_evento',
                 'id_corral',
                 'equipo',
                 'contacto_emerg',
