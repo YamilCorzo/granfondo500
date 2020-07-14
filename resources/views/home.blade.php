@@ -6,11 +6,22 @@
             <div class="card-header fondo-login">Competidores</div>
             <div class="card-body">
                 <div id="toolbar">
-                    <button type="button" class="btn btn-outline-primary"
-                    data-toggle="tooltip" data-placement="top" title="Reenviar"
-                    onclick="Enviar(); return false;">
-                        <i class="fas fa-mail-bulk"></i>
-                    </button>
+                    <div class="form-inline" role="form">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary"
+                            data-toggle="tooltip" data-placement="top" title="Reenviar"
+                            onclick="Enviar(); return false;">
+                                <i class="fas fa-mail-bulk"></i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary"
+                            data-toggle="tooltip" data-placement="top" title="Exportar"
+                            onclick="Export(); return false;">
+                                <i class="fas fa-file-csv"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <table
                 id="tcompetidores"
@@ -28,6 +39,8 @@
                 data-classes="table table-bordered table-striped table-borderless table-responsive-md"
                 data-buttons-class="btn btn-outline-primary"
                 data-filter-control="true"
+                data-show-export="false"
+                data-toolbar-align="right"
                 >
                 <thead class="bg-gradient-info text-white">
                 <tr>
@@ -59,6 +72,15 @@
             var ids = JSON.stringify(result);
             $.get("{!!url('correos')!!}/"+ids, ResultEnviar).fail(ResultEnviar);
         }
+    };
+
+    function Export() {
+        $('#tcompetidores').bootstrapTable('togglePagination');
+        $('#tcompetidores').tableExport({
+            fileName: 'GranFondo500',
+            ignoreColumn: ['state','id_link']
+        });
+        $('#tcompetidores').bootstrapTable('togglePagination');
     };
 
     function ResultEnviar(data,status,xhr) {
