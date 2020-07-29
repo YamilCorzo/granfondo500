@@ -1,4 +1,7 @@
 <?php
+
+use App\Exports\CompetidoresExport;
+use Maatwebsite\Excel\Facades\Excel;
 //use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +35,7 @@ Route::get('correos/{ids}', 'HomeController@EnviarCorreos')->name('correos');
 
 Route::get('formulario/{competidor}', 'CompetidoresController@edit')->name('formulario');
 Route::put('formulario/{competidor}', 'CompetidoresController@update')->name('formulario.update');
+
+Route::get('excel', function () {
+    return Excel::download(new CompetidoresExport, 'competidores.xlsx');
+})->name('excel');
