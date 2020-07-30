@@ -77,7 +77,7 @@ function GetLabel($attribute)
             $result = 'Edad';
             break;
         case 'id_genero':
-            $result = 'Genero*';
+            $result = 'Género*';
             break;
         case 'id_talla_jersey':
             $result = 'Talla jersey unisex';

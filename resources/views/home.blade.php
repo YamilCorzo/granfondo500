@@ -15,11 +15,7 @@
                             </button>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-primary"
-                            data-toggle="tooltip" data-placement="top" title="Exportar"
-                            onclick="Export(); return false;">
-                                <i class="fas fa-file-csv"></i>
-                            </button>
+                            <a data-toggle="tooltip" data-placement="top" title="Exportar" href="{{route('excel')}}" class="btn btn-outline-primary" role="button"><i class="fas fa-file-csv"></i></a>
                         </div>
                     </div>
                 </div>
