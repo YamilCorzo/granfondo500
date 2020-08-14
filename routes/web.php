@@ -37,5 +37,8 @@ Route::get('formulario/{competidor}', 'CompetidoresController@edit')->name('form
 Route::put('formulario/{competidor}', 'CompetidoresController@update')->name('formulario.update');
 
 Route::get('excel', function () {
-    return Excel::download(new CompetidoresExport, 'competidores.csv');
+    return Excel::download(new CompetidoresExport, 'competidores.xlsx');
 })->name('excel');
+
+//ruta de graficas
+Route::get('graficas', 'ChartController@index')->name('chart.index');
