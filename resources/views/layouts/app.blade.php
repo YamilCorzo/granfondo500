@@ -55,7 +55,9 @@
                                 <a class="nav-link" href="http://deuxdemo.com/proyectos/granfondo/?autologin_code=elBjmpyBZuIAL1Y4aORjH00qnNhINfTh" target="_blank">
                                 Administrar Tienda</a>
                             </li>
-
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('chart.index')}}">Gráficas</a>
+                                </li>
                                 @RouteNotIsName('register')
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
