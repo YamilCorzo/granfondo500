@@ -24,4 +24,9 @@ class SisTip extends Model
     {
         return $query->where('estatus', 1)->where('id_tip_pad', $id_tip_pad)->orWhere('id_tip', 0)->orderBy('orden')->get();
     }
+
+    public function scopeGraficas($query, $id_tip_pad)
+    {
+        return $query->where('estatus', 1)->where('id_tip_pad', $id_tip_pad)->orWhere('id_tip', 0)->orderBy('id_tip')->get();
+    }
 }
