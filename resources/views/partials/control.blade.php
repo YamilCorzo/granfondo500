@@ -7,6 +7,7 @@
         @case('id_distancia')
         @case('id_categoria')
         @case('id_corral')
+        @case('id_tipo_sangre')
             @include('partials.label')
             @include('partials.select')
             @include('partials.invalid-feedback')

@@ -35,10 +35,12 @@ class CompetidoresExport implements FromCollection, WithHeadings
                 SisTip::find($competidor->id_distancia)->des,
                 SisTip::find($competidor->id_categoria)->des,
                 SisTip::find($competidor->id_corral)->des,
+                SisTip::find($competidor->id_tipo_sangre)->des,
                 $competidor->equipo,
                 $competidor->contacto_emerg,
                 $competidor->tel_emerg,
                 $competidor->num_personas,
+                $competidor->alergias,
                 ($competidor->estatus == 1 ? 'Sin Capturar' : ($competidor->estatus == 2 ? 'Capturado' : 'Sin Asignar'))
             ];
         });

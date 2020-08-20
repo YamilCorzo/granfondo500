@@ -20,7 +20,9 @@ return [
                 'lugar_nac',
                 'edad',
                 'id_genero',
-                'c_terminos_condiciones',
+                'id_tipo_sangre',
+                'alergias',
+               // 'c_terminos_condiciones',
             ],
         ],
         [
@@ -33,11 +35,11 @@ return [
                 'id_categoria',
                 'id_evento',
                 'id_corral',
+                'num_personas',
                 'equipo',
                 'contacto_emerg',
                 'tel_emerg',
-                'num_personas',
-            ],
+             ],
         ],
         [
             'headercard'=>'EXONERACIONES DE RESPONSABILIDAD',
@@ -67,14 +69,14 @@ return [
                 'c_menor_de',
             ],
         ],
-        [
+       /* [
             'headercard'=>'TÉRMINOS Y CONDICIONES',
             'attributes'=>
             [
                 'c_conformidad',
                 'c_conocimiento',
             ],
-        ],
+        ],*/
     ],
     'infocheck' => [
         'c_terminos_condiciones'=>'Acepto términos y condiciones del reglamento así como del aviso de privacidad de GF500 AC.',
