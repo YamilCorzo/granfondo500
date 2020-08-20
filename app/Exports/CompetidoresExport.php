@@ -69,10 +69,12 @@ class CompetidoresExport implements FromCollection, WithHeadings
             'Distancia',
             'Categoría',
             'Corral',
+            'Tipo de Sangre',
             'Equipo',
             'Contacto de emergencia',
             'Teléfono de emergencia',
             'Número de personas',
+            'Alergias',
             'Estatus',
         ];
     }
