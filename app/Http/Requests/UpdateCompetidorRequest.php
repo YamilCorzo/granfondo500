@@ -61,10 +61,12 @@ class UpdateCompetidorRequest extends FormRequest
                 'c_menor_de' => Rule::requiredIf(function () use ($edad) {
                     return ($edad > 15 && $edad < 17);
                 }),
-                'c_conformidad' => 'required',
-                'c_conocimiento' => 'required',
+               // 'c_conformidad' => 'required',
+                //'c_conocimiento' => 'required',
                 'c_jersey' => 'required',
                 'c_bici_triatlon' => 'required',
+                'id_tipo_sangre' => 'required|gt:0|exists:App\SisTip,id_tip',
+                'alergias' => 'required',
             ];
         }
     }

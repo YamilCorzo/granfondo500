@@ -62,9 +62,11 @@ class Controller extends BaseController
                     'num_personas' => $request->input('num_personas'),
                     'c_reglamento' => ($request->has('c_reglamento')) ? 1 : 0,
                     'c_menor_de' => ($request->has('c_menor_de')) ? 1 : 0,
-                    'c_conformidad' => ($request->has('c_conformidad')) ? 1 : 0,
-                    'c_conocimiento' => ($request->has('c_conocimiento')) ? 1 : 0,
+                    'c_conformidad' => 1,
+                    'c_conocimiento' => 1,
                     'estatus' => 2,
+                    'id_tipo_sangre' => $request->input('id_tipo_sangre'),
+                    'alergias' => $request->input('alergias'),
             ]);
         }
         $competidor = Competidor::find($competidor->id_competidor);

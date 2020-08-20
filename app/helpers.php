@@ -109,6 +109,12 @@ function GetLabel($attribute)
         case 'num_personas':
             $result = '¿Cuántas personas te acompañan? (no ciclistas)';
             break;
+        case 'id_tipo_sangre':
+            $result = 'Tipo de sangre';
+            break;
+        case 'alergias':
+            $result = 'Alergias';
+            break;
         default:
             $result = '';
     }
@@ -157,11 +163,11 @@ function GetDivRowFin($key,$attribute)
             if ($i%2==0) {
                 $result = '</div>';
             } else {
-                if ($attribute == 'num_personas') {
-                    $result = '</div>';
-                } else {
+               // if ($attribute == 'num_personas') {
+                 //   $result = '</div>';
+               // } else {
                     $result = '';
-                }
+                //}
             }
     }
     return $result;
@@ -232,6 +238,9 @@ function GetSisTip($attribute)
         case 'id_distancia':
             $result = SisTip::SisTipDetPadCero(17);
             break;
+        case 'id_tipo_sangre':
+                $result = SisTip::SisTipDetPadCero(39);
+                break;
         default:
             $result = null;
     }

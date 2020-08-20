@@ -65,5 +65,10 @@ class Competidor extends Model
         $carbon = new Carbon($this->fec_reg);
         return $carbon->isoFormat('dddd DD \\d\\e MMMM \\d\\e\\l YYYY, h:mm A');
     }
+    public function TipoDeSangre()
+    {
+        return SisTip::find($this->id_tipo_sangre)->des;
+    }
+
 
 }
