@@ -46,7 +46,7 @@ class UpdateCompetidorRequest extends FormRequest
                 'celular' => 'required|integer|min:10',
                 'fec_nacimiento' => 'required|date',
                 'lugar_nac' => 'required|min:3',
-                'edad' => 'required|min:15|gte:15',
+                'edad' => 'required|gte:15',
                 'id_genero' => 'required|gt:0|exists:App\SisTip,id_tip',
                 'c_terminos_condiciones' => 'required',
                 'id_talla_jersey' => 'required|gt:0|exists:App\SisTip,id_tip',
