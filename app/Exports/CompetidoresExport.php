@@ -41,6 +41,8 @@ class CompetidoresExport implements FromCollection, WithHeadings
                 $competidor->tel_emerg,
                 $competidor->num_personas,
                 $competidor->alergias,
+                $competidor->compania_seguros,
+                $competidor->no_poliza,
                 ($competidor->estatus == 1 ? 'Sin Capturar' : ($competidor->estatus == 2 ? 'Capturado' : 'Sin Asignar'))
             ];
         });

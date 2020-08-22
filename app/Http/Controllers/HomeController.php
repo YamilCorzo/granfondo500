@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Config;
 use App\Http\Requests\UpdateCompetidorRequest;
+use Barryvdh\DomPDF\PDF;
 
 class HomeController extends Controller
 {
@@ -143,6 +144,56 @@ class HomeController extends Controller
         } catch(\Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
+    }
+
+    public function pdfDownload(){
+        set_time_limit(300);
+        $pdf = app('dompdf.wrapper');
+
+        $competidores = \DB::table('competidores')->get();
+        $html = '';
+      
+        foreach($competidores as $competidor)
+        {
+           $categoria='';
+            switch ($competidor->id_categoria) {
+                case '21':
+                    $categoria = '15 - 17 / Juvenil';
+                    break;
+                case '22':
+                    $categoria = '18 - 39 / Libre';
+                    break;
+                case '23':
+                    $categoria = '40 - 44 / Master A';
+                    break;
+                case '24':
+                    $categoria = '45 - 49 / Master B';
+                    break;
+                case '25':
+                    $categoria = '50 - 54 / Master C';
+                        break;
+                case '26':
+                    $categoria = '55 - 59 / Master D';
+                        break;
+                case '27':
+                    $categoria = '60 - 64 / Master E';
+                        break;
+                case '28':
+                    $categoria = '60 + / Master E';
+                        break;
+                case '29':
+                    $categoria = '65 + / Master F';
+                        break;
+                default:
+                    $result = null;
+            }
+            $view = view('partials/vista-pdf')->with(compact('competidor', 'categoria'));
+            $html .= $view->render();
+        }
+        $pdf = \PDF::loadHTML($html);            
+        $sheet = $pdf->setPaper('letter', 'portrait');
+    
+        return $sheet->download('competidores.pdf');  // $hours can not be accessed outside foreach. So changed the file name to `download.pdf`.
     }
 
 

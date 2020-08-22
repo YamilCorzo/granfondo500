@@ -42,3 +42,6 @@ Route::get('excel', function () {
 
 //ruta de graficas
 Route::get('graficas', 'ChartController@index')->name('chart.index');
+
+//Descargar pdf
+Route::get('pdfdownload', 'HomeController@pdfDownload')->name('pdfDownload');

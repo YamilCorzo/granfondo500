@@ -115,6 +115,12 @@ function GetLabel($attribute)
         case 'alergias':
             $result = 'Alergias';
             break;
+        case 'compania_seguros':
+            $result = 'Compañia de seguros';
+            break;
+        case 'no_poliza':
+            $result = 'Numero de poliza';
+            break;
         default:
             $result = '';
     }
