@@ -5,7 +5,7 @@ use Illuminate\Support\Carbon;
 return [
     'cards' => [
         [
-            'headercard'=>'GRAN FONDO 500 VERACRUZ 2001',//.(Carbon::now()->add(1, 'year')->year),
+            'headercard'=>'GRAN FONDO 500 VERACRUZ 2021',//.(Carbon::now()->add(1, 'year')->year),
             'attributes'=>
             [
                 'nombre',
@@ -35,8 +35,8 @@ return [
                 'id_categoria',
                 'id_evento',
                 'id_corral',
-                'num_personas',
                 'equipo',
+                'num_personas',
                 'contacto_emerg',
                 'tel_emerg',
              ],

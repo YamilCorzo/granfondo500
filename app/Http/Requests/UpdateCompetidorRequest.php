@@ -48,7 +48,7 @@ class UpdateCompetidorRequest extends FormRequest
                 'lugar_nac' => 'required|min:3',
                 'edad' => 'required|gte:15',
                 'id_genero' => 'required|gt:0|exists:App\SisTip,id_tip',
-                'c_terminos_condiciones' => 'required',
+                //'c_terminos_condiciones' => 'required',
                 'id_talla_jersey' => 'required|gt:0|exists:App\SisTip,id_tip',
                 'id_talla_calcetas' => 'required|gt:0|exists:App\SisTip,id_tip',
                 'id_distancia' => 'required|gt:0|exists:App\SisTip,id_tip',
@@ -116,6 +116,7 @@ class UpdateCompetidorRequest extends FormRequest
             'c_conocimiento' => 'campo',
             'c_jersey' => 'campo',
             'c_bici_triatlon' => 'campo',
+            'id_tipo_sangre' => 'tipo de sangre',
         ];
     }
 }

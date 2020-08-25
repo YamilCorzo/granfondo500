@@ -64,6 +64,8 @@ class Controller extends BaseController
                     'c_menor_de' => ($request->has('c_menor_de')) ? 1 : 0,
                     'c_conformidad' => 1,
                     'c_conocimiento' => 1,
+                    'c_jersey' => ($request->has('c_jersey')) ? 1 : 0,
+                    'c_bici_triatlon' => ($request->has('c_bici_triatlon')) ? 1 : 0,
                     'estatus' => 2,
                     'id_tipo_sangre' => $request->input('id_tipo_sangre'),
                     'alergias' => $request->input('alergias'),
