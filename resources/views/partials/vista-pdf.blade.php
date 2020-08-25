@@ -30,7 +30,7 @@ p{
 
 </style>
 
-<div id="hoja"> 
+<div id="hoja">
     <div id="titulo">
         <p class="labels">2a. Edición "GRAN FONDO 500 VERACRUZ 2021"</p>
         <p class="labels">GF 500 A.C. PRESENTE: </p>
@@ -41,7 +41,7 @@ p{
             <p class="labels">Nombre: <strong>{{ $competidor->nombre }}</strong><p>
         </div>
         <div class="atributos">
-            <p class="labels">Categoria: <strong>{{ $categoria }}</strong><p>
+            <p class="labels">Categoria: <strong>{{$competidor->Categoria()}}</strong><p>
         </div>
         <div class="atributos">
             <p class="labels">Número de competidor: <strong>{{ $competidor->id_competidor }}</strong><p>
@@ -77,7 +77,7 @@ p{
             RECONOZCO CONOCER EL REGLAMENTO Y LAS NORMAS DEL EVENTO, COMPROMETIÉNDOME A ACATARLAS Y SEGUIR LAS
             INSTRUCCIONES DE LA ORGANIZACIÓN Y AUTORIDADES, SIENDO SABEEDOR QUE EN CASO DE INCUMPLIRLAS PODRÍA SER
             SANCIONADO E INCLUSIVE EXPULSADO INMEDIATAMENTE DE LA COMPETENCIA Y EVENTO SIN QUE TENGA DERECHO A REEMBOLSO O
-            BONIFICACIÓN ALGUNA. 
+            BONIFICACIÓN ALGUNA.
             </p>
 
             <p class="text">

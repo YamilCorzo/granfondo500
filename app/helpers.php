@@ -119,7 +119,7 @@ function GetLabel($attribute)
             $result = 'Compañia de seguros';
             break;
         case 'no_poliza':
-            $result = 'Numero de poliza';
+            $result = 'Número de poliza';
             break;
         default:
             $result = '';

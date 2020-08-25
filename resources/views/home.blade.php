@@ -15,7 +15,7 @@
                             </button>
                         </div>
                         <div class="form-group">
-                            <a data-toggle="tooltip" data-placement="top" title="Exportar" href="{{route('excel')}}" class="btn btn-outline-primary" role="button"><i class="fas fa-file-csv"></i></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Exportar" href="{{route('excel')}}" class="btn btn-outline-primary" role="button"><i class="fas fa-file-excel"></i></a>
                         </div>
                     </div>
                 </div>
