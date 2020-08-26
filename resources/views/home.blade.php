@@ -15,7 +15,14 @@
                             </button>
                         </div>
                         <div class="form-group">
-                            <a data-toggle="tooltip" data-placement="top" title="Exportar" href="{{route('excel')}}" class="btn btn-outline-primary" role="button"><i class="fas fa-file-csv"></i></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Exportar" href="{{route('excel')}}" class="btn btn-outline-primary" role="button"><i class="fas fa-file-excel"></i></a>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary"
+                            data-toggle="tooltip" data-placement="top" title="Responsiva"
+                            onclick="Responsiva(); return false;">
+                                <i class="fas fa-file-pdf"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -55,6 +62,25 @@
             </div>
         </div>
 </form>
+<div class="modal" tabindex="-1" id="modal_fecha">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Fecha de responsiva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="date" class="form-control" name="fecha_resp" id="fecha_resp">
+            </div>
+            <div class="modal-footer">
+                <button onclick="GetResponsiva(); return false;" type="button" class="btn btn-outline-primary">Generar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('js')
 <script>
@@ -70,14 +96,14 @@
         }
     };
 
-    function Export() {
-        $('#tcompetidores').bootstrapTable('togglePagination');
-        $('#tcompetidores').tableExport({
-            fileName: 'GranFondo500',
-            ignoreColumn: ['state','id_link']
-        });
-        $('#tcompetidores').bootstrapTable('togglePagination');
-    };
+    // function Export() {
+    //     $('#tcompetidores').bootstrapTable('togglePagination');
+    //     $('#tcompetidores').tableExport({
+    //         fileName: 'GranFondo500',
+    //         ignoreColumn: ['state','id_link']
+    //     });
+    //     $('#tcompetidores').bootstrapTable('togglePagination');
+    // };
 
     function ResultEnviar(data,status,xhr) {
         Swal.close();
@@ -88,15 +114,25 @@
         }
     };
 
-    $('#tcompetidores').bootstrapTable({
-        locale:'es-MX',
-        pagination: true,
-        pageList: [10, 25, 50, 100, 500, 'Todo'],
-        search: true,
-        searchAlign: 'left',
-        showExport: true,
-        exportDataType: 'all',
-        exportTypes:['csv', 'txt', 'xlsx'],
-    });
+    // $('#tcompetidores').bootstrapTable({
+    //     locale:'es-MX',
+    //     pagination: true,
+    //     pageList: [10, 25, 50, 100, 500, 'Todo'],
+    //     search: true,
+    //     searchAlign: 'left',
+    //     showExport: true,
+    //     exportDataType: 'all',
+    //     exportTypes:['csv', 'txt', 'xlsx'],
+    // });
+
+    function Responsiva() {
+        $('#modal_fecha').modal('show');
+    };
+
+    function GetResponsiva() {
+        window.open("{!!url('pdfDownload')!!}/"+$('#fecha_resp').val(), "_blank");
+        $('#modal_fecha').modal('hide');
+    };
+
 </script>
 @stop

@@ -67,6 +67,8 @@ class UpdateCompetidorRequest extends FormRequest
                 'c_bici_triatlon' => 'required',
                 'id_tipo_sangre' => 'required|gt:0|exists:App\SisTip,id_tip',
                 'alergias' => 'required',
+                'compania_seguros' => 'required',
+                'no_poliza' => 'required|integer',
             ];
         }
     }

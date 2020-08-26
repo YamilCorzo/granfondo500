@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Config;
 use App\Http\Requests\UpdateCompetidorRequest;
+use Barryvdh\DomPDF\PDF;
 
 class HomeController extends Controller
 {
@@ -143,6 +144,27 @@ class HomeController extends Controller
         } catch(\Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
+    }
+
+    public function pdfDownload($fecha){
+        set_time_limit(300);
+
+        $fecha = new Carbon($fecha);
+
+        $pdf = app('dompdf.wrapper');
+
+        $competidores = Competidor::Activos()->get();
+        $html = '';
+
+        foreach($competidores as $competidor)
+        {
+            $view = view('partials/vista-pdf')->with(compact('competidor','fecha'));
+            $html .= $view->render();
+        }
+        $pdf = \PDF::loadHTML($html);
+        $sheet = $pdf->setPaper('letter', 'portrait');
+
+        return $sheet->download('competidores.pdf');  // $hours can not be accessed outside foreach. So changed the file name to `download.pdf`.
     }
 
 

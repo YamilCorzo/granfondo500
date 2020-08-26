@@ -22,6 +22,8 @@ return [
                 'id_genero',
                 'id_tipo_sangre',
                 'alergias',
+                'compania_seguros',
+                'no_poliza',
                // 'c_terminos_condiciones',
             ],
         ],
