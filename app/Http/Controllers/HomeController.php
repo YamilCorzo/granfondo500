@@ -146,8 +146,11 @@ class HomeController extends Controller
         }
     }
 
-    public function pdfDownload(){
+    public function pdfDownload($fecha){
         set_time_limit(300);
+
+        $fecha = new Carbon($fecha);
+
         $pdf = app('dompdf.wrapper');
 
         $competidores = Competidor::Activos()->get();
@@ -155,7 +158,7 @@ class HomeController extends Controller
 
         foreach($competidores as $competidor)
         {
-            $view = view('partials/vista-pdf')->with(compact('competidor'));
+            $view = view('partials/vista-pdf')->with(compact('competidor','fecha'));
             $html .= $view->render();
         }
         $pdf = \PDF::loadHTML($html);

@@ -38,7 +38,7 @@ p{
 
     <div id="caja">
         <div class="atributos">
-            <p class="labels">Nombre: <strong>{{ $competidor->nombre }}</strong><p>
+            <p class="labels">Nombre: <strong>{{ $competidor->nombre.' '.$competidor->apellidos }}</strong><p>
         </div>
         <div class="atributos">
             <p class="labels">Categoria: <strong>{{$competidor->Categoria()}}</strong><p>
@@ -53,7 +53,7 @@ p{
             <p class="labels">Contacto en caso de accidente: <strong>{{ $competidor->contacto_emerg }}</strong><p>
         </div>
         <div class="atributos">
-            <p class="labels">Celular del contacto: <strong>{{ $competidor->celular }}</strong><p>
+            <p class="labels">Celular del contacto: <strong>{{ $competidor->tel_emerg }}</strong><p>
         </div>
     </div>
 
@@ -98,10 +98,9 @@ p{
     </div>
 
     <div class="clearfix">
-        <p class="labels">5 de junio del 2021</p>
-
+        <p class="labels">{{$fecha->isoFormat('DD \\d\\e MMMM \\d\\e\\l YYYY')}}</p>
         <p class="labels">_______________________________</p>
-        <p class="labels">{{ $competidor->nombre }}<p>
+        <p class="labels">{{ $competidor->nombre.' '.$competidor->apellidos }}<p>
     </div>
 
     <hr>
