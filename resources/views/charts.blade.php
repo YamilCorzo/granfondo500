@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card bg-white shadow rounded">
-    <div class="card-header fondo-login">Graficas</div>
+    <div class="card-header fondo-login">Gráficas</div>
         <div class="card-body">
 
             <div class="panel-body">
