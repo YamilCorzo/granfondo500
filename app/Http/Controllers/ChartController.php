@@ -32,9 +32,9 @@ class ChartController extends Controller
                     }
 
         $chart_estado = new CompetidorChart;
-        $chart_estado->title('Participantes por estado', 18);
+        $chart_estado->title('Participantes por Estado', 18);
         $chart_estado->labels($labels_estado);
-        $chart_estado->dataset('Participantes por estado', 'bar', $competidor_estado)->options([
+        $chart_estado->dataset('Participantes por Estado', 'bar', $competidor_estado)->options([
             'fill' => 'true',
             'backgroundColor' => '#FF9966'
         ]);
@@ -68,9 +68,9 @@ class ChartController extends Controller
         ->pluck('count');
 
         $chart_categoria = new CompetidorChart;
-        $chart_categoria->title('Participacion por categoria', 18);
+        $chart_categoria->title('Participación de categorías', 18);
         $chart_categoria->labels(['NA', 'Libre', 'Master A', 'Master B', 'Master C', 'Master D', 'Master E', 'Master E', 'Master F']);
-        $chart_categoria->dataset('Participacion por categoria', 'bar', $competidor_categoria)->options([
+        $chart_categoria->dataset('Participación por categorías', 'bar', $competidor_categoria)->options([
             'fill' => 'true',
             'backgroundColor' => '#FF9966'
         ]);
@@ -126,9 +126,9 @@ class ChartController extends Controller
                     ->pluck('count');
 
         $chart_paquetes = new CompetidorChart;
-        $chart_paquetes->title('Participacion de paquetes', 18);
-        $chart_paquetes->labels(['VIP','Estandar']);
-        $chart_paquetes->dataset('Participacion de paquetes', 'doughnut', $competidor_paquete)->options([
+        $chart_paquetes->title('Participación de paquetes', 18);
+        $chart_paquetes->labels(['VIP','Estándar']);
+        $chart_paquetes->dataset('Participación de paquetes', 'doughnut', $competidor_paquete)->options([
             'fill' => 'true',
             'backgroundColor' =>  ['#8FAADC', '#FF9966'],
 
@@ -153,7 +153,7 @@ class ChartController extends Controller
            ->pluck('count');
            
            $chart_genero = new CompetidorChart;
-           $chart_genero->title('Participacion por genero', 18);
+           $chart_genero->title('Participación por genero', 18);
            $chart_genero->labels(['NA', 'Femenil', 'Varonil']);
            $chart_genero->dataset('Participacion por genero', 'doughnut', $competidor_genero)->options([
                'fill' => 'true',
