@@ -11,10 +11,8 @@ use App\Charts\CompetidorChart;
 
 class ChartController extends Controller
 {
-    public function index()
-    {
+    public function index(){
 
-        //Codigo para poner valor y porcentaje en el too
         $javabar =  '(tooltipItem, data) => {
             let sum = 0;
             let value = data.datasets[0].data[tooltipItem.index];
@@ -41,7 +39,7 @@ class ChartController extends Controller
         DB::statement("SET lc_time_names = 'es_MX'");
         //GRAFICAS DE BARRAS
 
-        //Participantes por esta
+        //Participantes por estado
         $estados = Competidor::select(DB::raw("COUNT(*) as count"),DB::raw("CASE estado WHEN '' THEN 'Sin Asignar' ELSE estado END AS edo"))->orderBy("estado")->groupBy('estado');
         $chart_estado = new CompetidorChart;
         $chart_estado->title('Participantes por Estado', 18);
@@ -85,7 +83,7 @@ class ChartController extends Controller
                     'backgroundColor' => '#FF9966'
         ]);
 
-        //Cantidad de calcet
+        //Cantidad de calcetas
         $calcetas = SisTip::Graficas(13);
         $chart_calcetas = new CompetidorChart;
         $chart_calcetas->title('Cantidad de calcetas', 18);
@@ -100,8 +98,7 @@ class ChartController extends Controller
                 'backgroundColor' => '#FF9966'
         ]);
 
-
-        //Cantidad de Jerse
+        //Cantidad de Jerseys
         $jerseys = SisTip::Graficas(4);
         $chart_jerseys = new CompetidorChart;
         $chart_jerseys->title('Cantidad de Jerseys', 18);
@@ -115,7 +112,7 @@ class ChartController extends Controller
                 'backgroundColor' => '#FF9966'
         ]);
 
-        //Historial de inscripcion
+        //Historial de inscripciones
         $registro = Competidor::select(DB::raw('COUNT(*) as count'),DB::raw("DATE_FORMAT(fec_reg, '%b/%Y') as fecha"))
         ->groupBy(DB::raw('month(fec_reg)'))->oldest('fec_reg');
         $chart_registro = new CompetidorChart;
@@ -128,19 +125,17 @@ class ChartController extends Controller
 
         //GRAFICAS DE DONA
 
-        //Participacion de paquete
+        //Participacion de paquetes
         $paquete = Competidor::select(DB::raw("COUNT(*) as count"),DB::raw("REPLACE(obtenerProducto(id_evento),'PAQUETE ','') as paquete"))
         ->groupBy('id_evento')->orderBy('paquete');
         $chart_paquetes = new CompetidorChart;
         $chart_paquetes->title('Participación de paquetes', 18);
         $chart_paquetes->labels($paquete->pluck('paquete'));
         $chart_paquetes->dataset('Participación de paquetes', 'doughnut', $paquete->pluck('count'))->options([
-
             'fill' => 'true',
             'backgroundColor' =>  ['#8FAADC', '#FF9966'],
 
         ]);
-
 
         //Distancias seleccionadas
         $distancia = SisTip::Graficas(17);
@@ -229,5 +224,8 @@ class ChartController extends Controller
                 ]
             ]
         ]);
+
+
+        return view('charts', compact('chart_estado', 'chart_edad', 'chart_distancia','chart_genero', 'chart_categoria', 'chart_paquetes', 'chart_calcetas', 'chart_jerseys', 'chart_registro'));
     }
 }
