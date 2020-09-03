@@ -2,261 +2,232 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-
-use App\Charts\CompetidorChart;
-use App\Competidor;
-use Charts;
 use DB;
+use Charts;
+use App\SisTip;
+use App\Competidor;
+use Illuminate\Http\Request;
+use App\Charts\CompetidorChart;
 
 class ChartController extends Controller
 {
     public function index()
     {
 
-        //Codigo para poner valor y porcentaje en el tooltip
-        $tooltip = 'function(tooltipItem, data) {
-            var dataset = data.datasets[tooltipItem.datasetIndex];
-            var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
-              return previousValue + currentValue;
+        //Codigo para poner valor y porcentaje en el too
+        $javabar =  '(tooltipItem, data) => {
+            let sum = 0;
+            let value = data.datasets[0].data[tooltipItem.index];
+            let dataArr = data.datasets[0].data;
+            let label = data.labels[tooltipItem.index];
+            dataArr.map(data => {
+                sum += parseFloat(data);
             });
-            var currentValue = dataset.data[tooltipItem.index];
-            var percentage = Math.floor(((currentValue/total) * 100)+0.5);
-            return data["datasets"][0]["data"][tooltipItem["index"]] + " - " + percentage + "%";;
+            let percentage = (value*100 / sum).toFixed(2)+"%";
+            return " " + value + " - " + percentage;
+        }';
+        $java = '(tooltipItem, data) => {
+            let sum = 0;
+            let value = data.datasets[0].data[tooltipItem.index];
+            let dataArr = data.datasets[0].data;
+            let label = data.labels[tooltipItem.index];
+            dataArr.map(data => {
+                sum += parseFloat(data);
+            });
+            let percentage = (value*100 / sum).toFixed(2)+"%";
+            return " " + label + " - "+ value + " - " + percentage;
         }';
 
-
-
-
+        DB::statement("SET lc_time_names = 'es_MX'");
         //GRAFICAS DE BARRAS
 
-        //Participantes por estado
-        $competidor_estado = Competidor::select(DB::raw("COUNT(*) as count")) //Objeto para llenar valores de la grafica
-            ->groupBy(DB::raw("estado"))
-            ->pluck('count');
-
-        $registros_estado = Competidor::select('estado')
-            ->groupBy('estado')
-            ->get();
-
-        $labels_estado = collect();
-        $cont = 0;
-        foreach ($registros_estado as $registro) {
-            $labels_estado->push($registro->estado); //Objeto para las etiquetas de la grafica
-        }
-
+        //Participantes por esta
+        $estados = Competidor::select(DB::raw("COUNT(*) as count"),DB::raw("CASE estado WHEN '' THEN 'Sin Asignar' ELSE estado END AS edo"))->orderBy("estado")->groupBy('estado');
         $chart_estado = new CompetidorChart;
         $chart_estado->title('Participantes por Estado', 18);
-        $chart_estado->labels($labels_estado);
-        $chart_estado->dataset('Participantes por Estado', 'bar', $competidor_estado)->options([
-            'fill' => 'true',
-            'backgroundColor' => '#FF9966',
-
-        ]);
-
-        $chart_estado->options([
-            'tooltips' => [
-                'callbacks' => [
-                    'label' => $chart_estado->rawObject($tooltip)
+        $chart_estado->labels($estados->pluck('edo'));
+        $chart_estado->dataset(
+            'Participantes por Estado',
+            'bar',
+            $estados->pluck('count'))->options(
+                [
+                    'fill' => 'true',
+                    'backgroundColor' => '#FF9966'
                 ]
-            ]
-        ]);
+        );
 
         //Edades de participantes
-        $competidor_edad = Competidor::select(DB::raw("COUNT(*) as count"))
-            ->groupBy(DB::raw("edad"))
-            ->pluck('count');
-
-        $registros_edad = Competidor::select('edad')
-            ->groupBy('edad')
-            ->get();
-
-        $labels_edad = collect();
-        $cont = 0;
-        foreach ($registros_edad as $registro) {
-            $labels_edad->push($registro->edad);
-        }
-
+        $edades = Competidor::select(DB::raw("COUNT(*) as count"),'edad')->orderBy("edad")->groupBy('edad');
         $chart_edad = new CompetidorChart;
         $chart_edad->title('Edades de participantes', 18);
-        $chart_edad->labels($labels_edad);
-        $chart_edad->dataset('Edades de participantes', 'bar', $competidor_edad)->options([
-            'fill' => 'true',
-            'backgroundColor' => '#FF9966'
-        ]);
-        $chart_edad->options([
-            'tooltips' => [
-                'callbacks' => [
-                    'label' => $chart_edad->rawObject($tooltip)
+        $chart_edad->labels($edades->pluck('edad'));
+        $chart_edad->dataset(
+            'Edades de participantes',
+            'bar',
+            $edades->pluck('count'))->options(
+                [
+                    'fill' => 'true',
+                    'backgroundColor' => '#FF9966'
                 ]
-            ]
-        ]);
+        );
 
         //Participacion por categoria
-        $competidor_categoria = Competidor::select(DB::raw("COUNT(*) as count"))
-            ->groupBy(DB::raw("id_categoria"))
-            ->pluck('count');
-
+        $categorias = SisTip::Graficas(20);
         $chart_categoria = new CompetidorChart;
         $chart_categoria->title('Participación de categorías', 18);
-        $chart_categoria->labels(['NA', 'Libre', 'Master A', 'Master B', 'Master C', 'Master D', 'Master E', 'Master E', 'Master F']);
-        $chart_categoria->dataset('Participación por categorías', 'bar', $competidor_categoria)->options([
-            'fill' => 'true',
-            'backgroundColor' => '#FF9966'
-        ]);
-        $chart_categoria->options([
-            'tooltips' => [
-                'callbacks' => [
-                    'label' =>  $chart_categoria->rawObject($tooltip)
-                ]
-            ]
+        $chart_categoria->labels($categorias->pluck('des'));
+        $chart_categoria->dataset(
+            'Participación por categorías',
+            'bar',
+            $categorias->pluck('count')
+            )->options([
+                    'fill' => 'true',
+                    'backgroundColor' => '#FF9966'
         ]);
 
-        //Cantidad de calcetas
-        $competidor_calceta = Competidor::select(DB::raw("COUNT(*) as count"))
-            ->groupBy(DB::raw("id_talla_calcetas"))
-            ->pluck('count');
-
+        //Cantidad de calcet
+        $calcetas = SisTip::Graficas(13);
         $chart_calcetas = new CompetidorChart;
         $chart_calcetas->title('Cantidad de calcetas', 18);
-        $chart_calcetas->labels(['#N/A', 'Small', 'Medium', 'Large']);
-        $chart_calcetas->dataset('Cantidad de calcetas', 'bar', $competidor_calceta)->options([
-            'fill' => 'true',
-            'Color' => '#51C1C0',
-            'backgroundColor' => '#FF9966'
-        ]);
-        $chart_calcetas->options([
-            'tooltips' => [
-                'callbacks' => [
-                    'label' =>  $chart_calcetas->rawObject($tooltip)
-                ]
-            ]
+        $chart_calcetas->labels($calcetas->pluck('des'));
+        $chart_calcetas->dataset(
+            'Cantidad de calcetas',
+            'bar',
+            $calcetas->pluck('count')
+            )->options([
+                'fill' => 'true',
+                'Color' => '#51C1C0',
+                'backgroundColor' => '#FF9966'
         ]);
 
 
-        //Cantidad de Jerseys
-
-        $competidor_jersey = Competidor::select(DB::raw("COUNT(*) as count"))
-            ->groupBy(DB::raw("id_talla_jersey"))
-            ->pluck('count');
-
+        //Cantidad de Jerse
+        $jerseys = SisTip::Graficas(4);
         $chart_jerseys = new CompetidorChart;
         $chart_jerseys->title('Cantidad de Jerseys', 18);
-        $chart_jerseys->labels(['2XS', '3XS', 'XS', 'XXL', 'S', 'M', 'XL', 'XL', '#N/A']);
-        $chart_jerseys->dataset('Cantidad de Jerseys', 'bar', $competidor_jersey)->options([
-            'fill' => 'true',
-            'backgroundColor' => '#FF9966'
-        ]);
-        $chart_jerseys->options([
-            'tooltips' => [
-                'callbacks' => [
-                    'label' =>  $chart_jerseys->rawObject($tooltip)
-                ]
-            ]
+        $chart_jerseys->labels($jerseys->pluck('des'));
+        $chart_jerseys->dataset(
+            'Cantidad de Jerseys',
+            'bar',
+            $jerseys->pluck('count')
+            )->options([
+                'fill' => 'true',
+                'backgroundColor' => '#FF9966'
         ]);
 
-
-        //Historial de inscripciones
-
-        $competidor_registro = Competidor::select(DB::raw("COUNT(*) as count"))
-            ->groupBy(\DB::raw("Month(fec_reg)"))
-            ->oldest('fec_reg')
-            ->pluck('count');
-
+        //Historial de inscripcion
+        $registro = Competidor::select(DB::raw('COUNT(*) as count'),DB::raw("DATE_FORMAT(fec_reg, '%b/%Y') as fecha"))
+        ->groupBy(DB::raw('month(fec_reg)'))->oldest('fec_reg');
         $chart_registro = new CompetidorChart;
         $chart_registro->title('Historial de inscripciones', 18);
-        $chart_registro->labels(['jul/2019', 'ago/2019', 'oct/2019', 'nov/2019', 'dic/2019', 'ene/2020', 'feb/2020', 'mar/2020', 'abr/2020', 'jun/2020']);
-        $chart_registro->dataset('Historial de inscripciones', 'bar', $competidor_registro)->options([
+        $chart_registro->labels($registro->pluck('fecha'));
+        $chart_registro->dataset('Historial de inscripciones', 'bar', $registro->pluck('count'))->options([
             'fill' => 'true',
             'backgroundColor' => '#FF9966'
         ]);
-        $chart_registro->options([
-            'tooltips' => [
-                'callbacks' => [
-                    'label' =>  $chart_registro->rawObject($tooltip)
-                ]
-            ]
-        ]);
-
 
         //GRAFICAS DE DONA
 
-        //Participacion de paquetes
-        $competidor_paquete = Competidor::select(DB::raw("COUNT(*) as count"))
-            ->groupBy(DB::raw("vip"))
-            ->pluck('count');
-
+        //Participacion de paquete
+        $paquete = Competidor::select(DB::raw("COUNT(*) as count"),DB::raw("REPLACE(obtenerProducto(id_evento),'PAQUETE ','') as paquete"))
+        ->groupBy('id_evento')->orderBy('paquete');
         $chart_paquetes = new CompetidorChart;
         $chart_paquetes->title('Participación de paquetes', 18);
-        $chart_paquetes->labels(['VIP', 'Estándar']);
-        $chart_paquetes->dataset('Participación de paquetes', 'doughnut', $competidor_paquete)->options([
+        $chart_paquetes->labels($paquete->pluck('paquete'));
+        $chart_paquetes->dataset('Participación de paquetes', 'doughnut', $paquete->pluck('count'))->options([
+
             'fill' => 'true',
             'backgroundColor' =>  ['#8FAADC', '#FF9966'],
 
         ]);
-        $chart_paquetes->options([
-            'tooltips' => [
-                'callbacks' => [
-                    'label' =>  $chart_paquetes->rawObject($tooltip)
-                ]
-            ]
-        ]);
-
 
 
         //Distancias seleccionadas
-        $competidor_distancia = Competidor::select(DB::raw("COUNT(*) as count"))
-            ->groupBy(DB::raw("id_distancia"))
-            ->pluck('count');
-
+        $distancia = SisTip::Graficas(17);
         $chart_distancia = new CompetidorChart;
         $chart_distancia->title('Distancias seleccionadas', 18);
-        $chart_distancia->labels(['NA', 'Fondo completo', 'Medio fondo']);
-        $chart_distancia->dataset('Distancias seleccionadas', 'doughnut', $competidor_distancia)->options([
+        $chart_distancia->labels($distancia->pluck('des'));
+        $chart_distancia->dataset('Distancias seleccionadas', 'doughnut', $distancia->pluck('count'))->options([
             'fill' => 'true',
             'backgroundColor' =>  ['gray', '#8FAADC', '#FF9966'],
         ]);
-        $chart_distancia->options([
-            'tooltips' => [
-                'callbacks' => [
-                    'label' =>  $chart_distancia->rawObject($tooltip)
-                ]
-            ]
-        ]);
-
-
 
         //Participacion por genero
-        $competidor_genero = Competidor::select(DB::raw("COUNT(*) as count"))
-            ->groupBy(DB::raw("id_genero"))
-            ->pluck('count');
-
+        $genero = SisTip::Graficas(1);
         $chart_genero = new CompetidorChart;
-        $chart_genero->title('Participación por genero', 18);
-        $chart_genero->labels(['NA', 'Femenil', 'Varonil']);
-        $chart_genero->dataset('Participación por genero', 'doughnut', $competidor_genero)->options([
+        $chart_genero->title('Participación por género', 18);
+        $chart_genero->labels($genero->pluck('des'));
+        $chart_genero->dataset('Participación por género', 'doughnut', $genero->pluck('count'))->options([
             'fill' => 'true',
             'backgroundColor' =>  ['gray', '#8FAADC', '#FF9966'],
         ]);
 
-        $chart_genero->options([
-            'tooltips' => [
+        //    $chart_genero->options(['plugins' => '{
+        //         "datalabels": {
+        //             "formatter": (value, ctx) => {
+        //                 let sum = 0;
+        //                 let dataArr = ctx.chart.data.datasets[0].data;
+        //                 dataArr.map(data => {
+        //                     sum += parseFloat(data);
+        //                 });
+        //                 let percentage = (value*100 / sum).toFixed(2)+"%";
+        //                 return percentage;
+        //             }
+        //         }
+        //     }']);
+       $chart_estado->options(['tooltips' => [
                 'callbacks' => [
-                    'label' =>  $chart_genero->rawObject($tooltip)
+                    'label' => $chart_estado->rawObject($javabar)
                 ]
             ]
         ]);
-
-
-
-        // $chart = Charts::database($users, 'bar', 'highcharts');
-
-
-
-
-
-
-        return view('charts', compact('chart_estado', 'chart_edad', 'chart_distancia', 'chart_genero', 'chart_categoria', 'chart_paquetes', 'chart_calcetas', 'chart_jerseys', 'chart_registro'));
+        $chart_edad->options(['tooltips' => [
+                'callbacks' => [
+                    'label' => $chart_edad->rawObject($javabar)
+                ]
+            ]
+        ]);
+        $chart_distancia->options(['tooltips' => [
+                'callbacks' => [
+                    'label' => $chart_distancia->rawObject($java)
+                ]
+            ]
+        ]);
+        $chart_genero->options(['tooltips' => [
+                'callbacks' => [
+                    'label' => $chart_genero->rawObject($java)
+                ]
+            ]
+        ]);
+        $chart_categoria->options(['tooltips' => [
+                'callbacks' => [
+                    'label' => $chart_categoria->rawObject($javabar)
+                ]
+            ]
+        ]);
+        $chart_paquetes->options(['tooltips' => [
+                'callbacks' => [
+                    'label' => $chart_paquetes->rawObject($java)
+                ]
+            ]
+        ]);
+        $chart_calcetas->options(['tooltips' => [
+                'callbacks' => [
+                    'label' => $chart_calcetas->rawObject($javabar)
+                ]
+            ]
+        ]);
+        $chart_jerseys->options(['tooltips' => [
+                'callbacks' => [
+                    'label' => $chart_jerseys->rawObject($javabar)
+                ]
+            ]
+        ]);
+        $chart_registro->options(['tooltips' => [
+                'callbacks' => [
+                    'label' => $chart_registro->rawObject($javabar)
+                ]
+            ]
+        ]);
     }
 }

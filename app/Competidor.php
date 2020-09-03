@@ -69,6 +69,4 @@ class Competidor extends Model
     {
         return SisTip::find($this->id_tipo_sangre)->des;
     }
-
-
 }
