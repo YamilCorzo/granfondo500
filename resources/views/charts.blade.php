@@ -46,6 +46,8 @@
 @endsection
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+
  {!! $chart_estado->script() !!}
  {!! $chart_edad->script() !!}
  {!! $chart_distancia->script() !!}

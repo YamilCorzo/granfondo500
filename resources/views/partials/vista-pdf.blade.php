@@ -15,19 +15,16 @@ p{
     width: 33%;
     float: left;
 }
-
 .clearfix{
     float: none;
     clear: both;
 }
-
 .labels{
     text-align: center;
 }
 .text{
     text-align: justify;
 }
-
 </style>
 
 <div id="hoja">
@@ -41,17 +38,20 @@ p{
             <p class="labels">Nombre: <strong>{{ $competidor->nombre.' '.$competidor->apellidos }}</strong><p>
         </div>
         <div class="atributos">
-            <p class="labels">Categoria: <strong>{{$competidor->Categoria()}}</strong><p>
+            <p class="labels">Distancia: <strong>{{$competidor->Distancia()}}</strong><p>
         </div>
         <div class="atributos">
-            <p class="labels">Número de competidor: <strong>{{ $competidor->id_competidor }}</strong><p>
+            <p class="labels">Categoria: <strong>{{$competidor->Categoria()}}</strong><p>
         </div>
     </div>
 
     <div class="clearfix">
         <div class="atributos">
-            <p class="labels">Contacto en caso de accidente: <strong>{{ $competidor->contacto_emerg }}</strong><p>
+            <p class="labels">Número de competidor: <strong>{{ $competidor->id_competidor }}</strong><p>
         </div>
+        <div class="atributos">
+            <p class="labels">Contacto en caso de accidente: <strong>{{ $competidor->contacto_emerg }}</strong><p>
+            </div>
         <div class="atributos">
             <p class="labels">Celular del contacto: <strong>{{ $competidor->tel_emerg }}</strong><p>
         </div>
