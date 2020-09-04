@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Database\Eloquent\Model;
 
@@ -65,8 +66,30 @@ class Competidor extends Model
         $carbon = new Carbon($this->fec_reg);
         return $carbon->isoFormat('dddd DD \\d\\e MMMM \\d\\e\\l YYYY, h:mm A');
     }
+
     public function TipoDeSangre()
     {
         return SisTip::find($this->id_tipo_sangre)->des;
+    }
+
+    public function scopeGraficas($query,$grafica)
+    {
+        switch ($grafica) {
+            case 'estados':
+                return $query->selectRaw("COUNT(*) as count,CASE estado WHEN '' THEN 'Sin Asignar' ELSE estado END AS des")
+                ->orderBy("estado")->groupBy('estado');
+            break;
+            case 'edades':
+                return $query->selectRaw("COUNT(*) as count, edad as des")->orderBy("edad")->groupBy('edad');
+            break;
+            case 'registros':
+                return $query->selectRaw("COUNT(*) as count, DATE_FORMAT(fec_reg, '%b/%Y') as des")
+                ->groupBy(DB::raw('month(fec_reg)'))->oldest('fec_reg');
+            break;
+            case 'paquetes':
+                return $query->selectRaw("COUNT(*) as count, REPLACE(obtenerProducto(id_evento),'PAQUETE ','') as des")
+                ->groupBy('id_evento')->orderBy('des');
+            break;
+        }
     }
 }
