@@ -23,7 +23,6 @@ class UpdateCompetidorRequest extends FormRequest
      */
     public function rules()
     {
-        //$edad = FormRequest::input('edad');
         if ($this->competidor->id_evento == 4243) {
             return [
                 'nombre' => 'required|min:3',
@@ -35,7 +34,8 @@ class UpdateCompetidorRequest extends FormRequest
                 'celular' => 'required|integer|min:10',
             ];
         } else {
-            $edad = $this->competidor->edad;
+            $edad = FormRequest::input('edad');
+            $id_enteraste = FormRequest::input('id_enteraste');
             return [
                 'nombre' => 'required|min:3',
                 'apellidos' => 'required|min:3',
@@ -69,14 +69,15 @@ class UpdateCompetidorRequest extends FormRequest
                 'alergias' => 'required',
                 'compania_seguros' => 'required',
                 'no_poliza' => 'required|integer',
+                'id_enteraste' => 'required|gt:0|exists:App\SisTip,id_tip',
+                'otro' => Rule::requiredIf($id_enteraste == 53),
             ];
         }
     }
 
     public function messages()
     {
-        //$edad = FormRequest::input('edad');
-        $edad = $this->competidor->edad;
+        $edad = FormRequest::input('edad');
         return [
             'required' => 'El :attribute es requerido.',
             'email' => 'Correo electrónico incorrecto.',
@@ -93,6 +94,7 @@ class UpdateCompetidorRequest extends FormRequest
             'c_menor_de.required' => 'Debe aceptar los términos. Edad: '.$edad,
             'c_jersey' => 'Debe aceptar el uso del Jersey obligatorio',
             'c_bici_triatlon' => 'Debe aceptar la prohibición del uso de Bicicleta de Triatlón',
+            'otro' => 'Debe capturar por que otro medio se enteró.',
         ];
     }
 
@@ -119,6 +121,8 @@ class UpdateCompetidorRequest extends FormRequest
             'c_jersey' => 'campo',
             'c_bici_triatlon' => 'campo',
             'id_tipo_sangre' => 'tipo de sangre',
+            'id_enteraste' => 'campo',
+            'otro' => 'campo',
         ];
     }
 }

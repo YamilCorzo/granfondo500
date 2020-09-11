@@ -10,6 +10,11 @@
             {!! config('granfondo.infocheck.'.$attribute) !!}
         </label>
     @break
+    @case('id_enteraste')
+        <label class="form-check-label form-inline"for="{{$tip->id_tip}}">
+            {{$tip->des}}
+        </label>
+    @break
     @default
         <label for="{{$attribute}}">
             {{GetLabel($attribute)}}

@@ -92,4 +92,9 @@ class Competidor extends Model
             break;
         }
     }
+
+    public function Enteraste()
+    {
+        return SisTip::find($this->id_enteraste)->des;
+    }
 }

@@ -245,8 +245,11 @@ function GetSisTip($attribute)
             $result = SisTip::SisTipDetPadCero(17);
             break;
         case 'id_tipo_sangre':
-                $result = SisTip::SisTipDetPadCero(39);
-                break;
+            $result = SisTip::SisTipDetPadCero(39);
+            break;
+        case 'id_enteraste':
+            $result = SisTip::SisTipDetPad(48);
+            break;
         default:
             $result = null;
     }
@@ -261,7 +264,7 @@ function GetSisTipCero()
 
 function GetColumns($attribute)
 {
-    switch ($attribute) {
+   switch ($attribute) {
         case 'c_terminos_condiciones':
         case 'c_reglamento':
         case 'c_menor_de':
@@ -270,7 +273,13 @@ function GetColumns($attribute)
         case 'c_jersey':
         case 'c_bici_triatlon':
             $result = 'form-group';
-            break;
+        break;
+        case 'id_enteraste':
+            $result = 'ml-3 form-group';
+        break;
+        case 'otro':
+            $result = 'mt-3';
+        break;
         default:
             $result = 'col-md-6 form-group';
     }
@@ -320,6 +329,11 @@ function GetProducto($id_evento)
     }
     return $result;
 }
+
+
+
+
+
 
 
 

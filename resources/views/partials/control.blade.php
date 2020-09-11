@@ -25,6 +25,16 @@
                 @include('partials.invalid-feedback')
             </div>
         @break
+        @case('id_enteraste')
+            <label>¿Cómo te enteraste del evento?</label></br>
+            @foreach (GetSisTip($attribute) as $tip)
+                <div class="icheck-primary form-check-inline">
+                    @include('partials.radio')
+                    @include('partials.label')
+                </div>
+            @endforeach
+            @include('partials.invalid-feedback')
+        @break
         @default
             @include('partials.label')
             @include('partials.input')

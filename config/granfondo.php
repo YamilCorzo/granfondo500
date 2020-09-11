@@ -24,6 +24,8 @@ return [
                 'alergias',
                 'compania_seguros',
                 'no_poliza',
+                'id_enteraste',
+                'otro',
                // 'c_terminos_condiciones',
             ],
         ],

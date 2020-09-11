@@ -71,6 +71,8 @@ class Controller extends BaseController
                     'alergias' => $request->input('alergias'),
                     'compania_seguros' => $request->input('compania_seguros'),
                     'no_poliza' => $request->input('no_poliza'),
+                    'id_enteraste' => $request->input('id_enteraste'),
+                    'otro' => $request->input('otro'),
             ]);
         }
         $competidor = Competidor::find($competidor->id_competidor);
